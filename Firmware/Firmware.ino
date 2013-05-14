@@ -20,17 +20,19 @@ void setup()
     CAN.begin();
     CAN.baudConfig(BUS_SPEED);
     CAN.setMode(NORMAL);
-    //CAN.setMode(LOOPBACK);  // set to "NORMAL" for standard com
+    // CAN.setMode(LOOPBACK);  // set to "NORMAL" for standard com
 
-    //Wait 10 seconds so that I can still upload even
-    //if the previous iteration spams the serial port
+    // Wait 10 seconds so that I can still upload even
+    // if the previous iteration spams the serial port
     delay(100);
 }
 
 void loop()
 {
     static byte val = 0;
-    byte length,rx_status,i;
+    val++;
+
+    byte length, rx_status,i;
     unsigned short frame_id;
     byte frame_data[8];
 
@@ -46,11 +48,10 @@ void loop()
     frame_id = 0x1d4;
     length = 8;
 
-    CAN.load_ff_0(length,frame_id,frame_data);
-    CAN.load_ff_1(1,0x1d5,frame_data);
+    CAN.load_ff_0(length, frame_id, frame_data);
+    CAN.load_ff_1(1, 0x1d5, frame_data);
     CAN.send_0();
     CAN.send_1();
 
-    val++;
     delay(100);
 }
