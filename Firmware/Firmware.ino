@@ -9,7 +9,7 @@
 #include <CAN.h>
 #include <SPI.h>
 
-#define BUS_SPEED 1000  // 1Mbps
+#define BUS_SPEED 1000  // 1Mbaud
 
 void setup()
 {
@@ -22,17 +22,33 @@ void setup()
     CAN.setMode(NORMAL);
     // CAN.setMode(LOOPBACK);  // set to "NORMAL" for standard com
 
-    // Wait 10 seconds so that I can still upload even
+    // Wait a second so that I can still upload even
     // if the previous iteration spams the serial port
-    delay(100);
+    delay(1000);
+
+    startNode(0x01); // @todo: variable auch nutzen!
 }
 
 void loop()
 {
+    receive();
+    delay(100);
+}
+
+void startNode(byte nodeNr)
+{
+    // Nanocan Referenzhandbuch S.14
+    byte startnodeCommand[2] = {0x01, 0x01};
+    CAN.load_ff_0(2, 0x00, startnodeCommand);
+    CAN.send_0();
+}
+
+void sendTest()
+{
     static byte val = 0;
     val++;
 
-    byte length, rx_status,i;
+    byte length;
     unsigned short frame_id;
     byte frame_data[8];
 
@@ -52,6 +68,47 @@ void loop()
     CAN.load_ff_1(1, 0x1d5, frame_data);
     CAN.send_0();
     CAN.send_1();
+}
 
-    delay(100);
+void receive()
+{
+    byte length = 0;
+    byte rx_status = 0;
+    unsigned short frame_id = 0;
+    byte frame_data[8];
+
+    // clear frame data
+    for (int i = 0; i < 8; i++)
+    {
+        frame_data[i] = 0;
+    }
+
+    rx_status = CAN.readStatus();
+    if ((rx_status & 0x01) == 0x01)
+    {
+        CAN.readDATA_ff_0(&length, frame_data, &frame_id);
+    }
+    else if ((rx_status & 0x02) == 0x02)
+    {
+        CAN.readDATA_ff_1(&length, frame_data, &frame_id);
+    }
+
+    if (((rx_status & 0x01) == 0x01) || ((rx_status & 0x02) == 0x02))
+    {
+        Serial.print("Rx:");
+        Serial.print(rx_status, HEX);
+        Serial.print(" ");
+        Serial.print(length, HEX);
+
+        Serial.print(" - ");
+        Serial.print(frame_id, HEX);
+        Serial.print(": ");
+
+        for (int i = 0; i < 8; i++)
+        {
+            Serial.print(" ");
+            Serial.print(frame_data[i], HEX);
+        }
+        Serial.println();
+    }
 }
