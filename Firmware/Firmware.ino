@@ -1,50 +1,56 @@
-// demo: CAN-BUS Shield, receive data
-#include <mcp_can.h>
+//     __  ___
+//    /  |/  /__  _________ _____  __  ______ ___
+//   / /|_/ / _ \/ ___/ __ `/ __ \/ / / / __ `__ \
+//  / /  / /  __/ /__/ /_/ / / / / /_/ / / / / / /
+// /_/  /_/\___/\___/\__,_/_/ /_/\__,_/_/ /_/ /_/
+//
+
+// You need to copy this libraries to your arduino library path
+#include <CAN.h>
 #include <SPI.h>
 
-unsigned char Flag_Recv = 0;
-unsigned char len = 0;
-unsigned char buf[8];
-char str[20];
+#define BUS_SPEED 1000  // 1Mbps
 
 void setup()
 {
-  attachInterrupt(0, MCP2515_ISR, FALLING);     // start interrupt
-  Serial.begin(115200);
-  
-  if(CAN.begin(CAN_500KBPS) ==CAN_OK) Serial.print("can init ok!!\r\n");
-  else Serial.print("Can init fail!!\r\n");
-}
+    Serial.begin(115200);
 
-void MCP2515_ISR()
-{
-    Flag_Recv = 1;
+    // initialize CAN bus class
+    // this class initializes SPI communications with MCP2515
+    CAN.begin();
+    CAN.baudConfig(BUS_SPEED);
+    CAN.setMode(NORMAL);
+    //CAN.setMode(LOOPBACK);  // set to "NORMAL" for standard com
+
+    //Wait 10 seconds so that I can still upload even
+    //if the previous iteration spams the serial port
+    delay(100);
 }
 
 void loop()
 {
-    if(Flag_Recv)                           // check if get data
-    {
-      Flag_Recv = 0;                        // clear flag
-      CAN.readMsgBuf(&len, buf);            // read data,  len: data length, buf: data buf
-      Serial.println("CAN_BUS GET DATA!");
-      Serial.print("data len = ");
-      Serial.println(len);
-      
-      for(int i = 0; i<len; i++)            // print the data
-      {
-        Serial.print(buf[i]);Serial.print("\t");
-      }
-      Serial.println();
-    }
-    
-  // send data:  id = 0x00, standrad flame, data len = 8, stmp: data buf
-  
-  unsigned char test[2] = "$";
-  CAN.sendMsgBuf(0x00, 0, 2, test);  
-  delay(100);                       // send data per 100ms
-}
+    static byte val = 0;
+    byte length,rx_status,i;
+    unsigned short frame_id;
+    byte frame_data[8];
 
-/*********************************************************************************************************
-  END FILE
-*********************************************************************************************************/
+    frame_data[0] = val;
+    frame_data[1] = 0xAA;
+    frame_data[2] = 0x00;
+    frame_data[3] = 0xFF;
+    frame_data[4] = 0x1A;
+    frame_data[5] = 0xCF;
+    frame_data[6] = 0xFC;
+    frame_data[7] = 0x1D;
+
+    frame_id = 0x1d4;
+    length = 8;
+
+    CAN.load_ff_0(length,frame_id,frame_data);
+    CAN.load_ff_1(1,0x1d5,frame_data);
+    CAN.send_0();
+    CAN.send_1();
+
+    val++;
+    delay(100);
+}

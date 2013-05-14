@@ -21,6 +21,7 @@ class MecanumVehicle
 
         // draw body
         stroke(0);
+        fill(255);
         strokeWeight(1);
         rect(0, 0, w, h);
 
@@ -39,6 +40,13 @@ class MecanumVehicle
         float fy = 0.7 * (speed[0] + speed[1] + speed[2] + speed[3]);
         line(w / 2, h / 2,
             w / 2 + round(fx), h / 2 - round(fy));
+
+        // text forces
+        fill(0);
+        text(speed[0], w, 0);
+        text(speed[1], 0, 0);
+        text(speed[2], 0, h);
+        text(speed[3], w, h);
 
         popMatrix();
     }
@@ -59,10 +67,10 @@ class MecanumVehicle
 
     void rotate(float _w)
     {
-        float v = _w * r;
-        speed[0] += round(w);
-        speed[1] += round(-w);
-        speed[2] += round(-w);
-        speed[3] += round(+w);
+        float s = 0.7 * _w * r;
+        speed[0] += round(+s);
+        speed[1] += round(-s);
+        speed[2] += round(-s);
+        speed[3] += round(+s);
     }
 };
