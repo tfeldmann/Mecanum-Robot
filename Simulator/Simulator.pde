@@ -12,5 +12,5 @@ void draw()
     background(200);
     vehicle.update();
     vehicle.translationTo(mouseX, height - mouseY);
-    vehicle.rotate(1.0);
+    vehicle.rotate(-1.0);
 }

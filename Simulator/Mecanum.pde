@@ -11,9 +11,7 @@ class MecanumVehicle
     {
         x = _x - w / 2;
         y = _y - h / 2;
-
         r = sqrt(w*w/4.0 + h*h/4.0);
-        println("r: "+r);
     }
 
     void update()
@@ -59,8 +57,12 @@ class MecanumVehicle
         speed[3] = round(w2);
     }
 
-    void rotate(float w)
+    void rotate(float _w)
     {
-
+        float v = _w * r;
+        speed[0] += round(w);
+        speed[1] += round(-w);
+        speed[2] += round(-w);
+        speed[3] += round(+w);
     }
 };
