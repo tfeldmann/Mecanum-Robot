@@ -76,5 +76,7 @@ class MecanumVehicle
         speed[1] += round(-s);
         speed[2] += round(-s);
         speed[3] += round(+s);
+
+        serialSend("v "+str(map(speed[0], -68, 68, -25000, 25000)));
     }
 };
