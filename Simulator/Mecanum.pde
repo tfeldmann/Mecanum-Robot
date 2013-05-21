@@ -51,7 +51,7 @@ class MecanumVehicle
         popMatrix();
     }
 
-    void translation(int vx, int vy)
+    void translation(float vx, float vy)
     {
         float w1 = (vy + vx)/(4 * 0.7);
         float w2 = (vy - vx)/(4 * 0.7);
@@ -60,13 +60,6 @@ class MecanumVehicle
         speed[1] = round(w2);
         speed[2] = round(w1);
         speed[3] = round(w2);
-    }
-
-    void translationTo(int _x, int _y)
-    {
-        float vx = _x - (x + w / 2);
-        float vy = _y - (y + h / 2);
-        translation(vx, vy);
     }
 
     void rotate(float _w)
