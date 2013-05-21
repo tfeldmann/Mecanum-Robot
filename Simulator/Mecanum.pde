@@ -6,6 +6,7 @@ class MecanumVehicle
     float r;
 
     int speed[] = {0, 0, 0, 0};  // wheel speeds
+    int fullspeed = 25000;
 
     MecanumVehicle(int _x, int _y)
     {
@@ -38,8 +39,7 @@ class MecanumVehicle
         stroke(0, 200, 0);
         float fx = 0.7 * (-speed[0] + speed[1] - speed[2] + speed[3]);
         float fy = 0.7 * (speed[0] + speed[1] + speed[2] + speed[3]);
-        line(w / 2, h / 2,
-            w / 2 + round(fx), h / 2 - round(fy));
+        line(w / 2, h / 2, w / 2 + round(fx), h / 2 - round(fy));
 
         // text forces
         fill(0);
@@ -51,10 +51,10 @@ class MecanumVehicle
         popMatrix();
     }
 
-    void translation(float vx, float vy)
+    void translation(int vx, int vy)
     {
-        float w1 = (vy - vx)/(4 * 0.7);
-        float w2 = (vy + vx)/(4 * 0.7);
+        float w1 = (vy + vx)/(4 * 0.7);
+        float w2 = (vy - vx)/(4 * 0.7);
 
         speed[0] = round(w1);
         speed[1] = round(w2);
@@ -77,6 +77,9 @@ class MecanumVehicle
         speed[2] += round(-s);
         speed[3] += round(+s);
 
-        serialSend("v "+str(map(speed[0], -68, 68, -25000, 25000)));
+        serialSend("v1 "+str(map(speed[0], -68, 68, 25000, -25000)));
+        serialSend("v2 "+str(map(speed[1], -68, 68, -25000, 25000)));
+        serialSend("v3 "+str(map(speed[2], -68, 68, -25000, 25000)));
+        serialSend("v4 "+str(map(speed[3], -68, 68, 25000, -25000)));
     }
 };

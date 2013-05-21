@@ -4,28 +4,31 @@ import processing.serial.*;
 
 MecanumVehicle vehicle;
 
-
-Serial serial;
-
 ControllIO controll;
 ControllDevice device;
 ControllStick translation;
 ControllSlider rotation;
+ControllButton stopButton;
+
+Serial serial;
 
 void setup()
 {
     size(500, 500);
     smooth();
+    frameRate(20);
 
-    for (int i = 0; i < Serial.list().length; i++)
-    {
-        println(Serial.list()[i]);
-    }
-    serial = new Serial(this, "/dev/tty.usbmodemfa131", 115200);
-
+    // usually the device appears as the last serial port.
+    // This is not nice at all and might not work in certain circumstances,
+    // feel free to add a select box!
+    serial = new Serial(this, Serial.list()[Serial.list().length-1], 115200);
 
     vehicle = new MecanumVehicle(width / 2, height / 2);
+    setupJoystick();
+}
 
+void setupJoystick()
+{
     controll = ControllIO.getInstance(this);
     device = controll.getDevice("Saitek Cyborg USB Stick");
 
@@ -35,6 +38,8 @@ void setup()
     x.setMultiplier(50.0);
     translation = new ControllStick(x, y);
     translation.setTolerance(0.05);
+
+    device.plug(this, "handleButton1Press", ControllIO.ON_PRESS, 0);
 
     rotation = device.getSlider("rz");
     rotation.setMultiplier(0.5);
@@ -48,6 +53,11 @@ void draw()
     vehicle.translation(translation.getX(), translation.getY());
     vehicle.rotate(rotation.getValue());
     vehicle.update();
+}
+
+void handleButton1Press()
+{
+    serialSend("stop");
 }
 
 /**
@@ -77,7 +87,7 @@ void serialEvent(Serial serial)
             msg = trim(msg);
             println(msg);
         }
-        catch (Exception ex)
+        catch (RuntimeException ex)
         {
             println(ex.getMessage());
         }
