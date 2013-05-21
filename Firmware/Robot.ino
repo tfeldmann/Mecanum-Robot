@@ -2,38 +2,48 @@
 // Robot.ino
 //
 //
-//   Wheel 4               Wheel 1
+//   Wheel 3               Wheel 0
 //     +--------------------+
 //     |                    |
 //     |               Arm  | -->
 //     |                    |
 //     +--------------------+
-//   Wheel 3               Wheel 2
+//   Wheel 2               Wheel 1
 //
 
-#define DEBUG     0
-#define BUS_SPEED 1000  // 1Mbaud
+#include <CAN.h>
+#include <SPI.h>
 
-void robot_init()
+#define DEBUGMODE 0
+#define CAN_BUS_SPEED 1000  // 1Mbaud
+
+void robot_begin()
 {
-    CAN.begin();
-    CAN.baudConfig(BUS_SPEED);
-    CAN.setMode(NORMAL);
-    delay(100);
+    robot_initCAN(CAN_BUS_SPEED);
 
-    for (int i = 0; i < 4; i++)
+    for (int wheel = 0; wheel < 4; wheel++)
     {
-        robot_initNode(robot_nodeAdress(i));
-
-        #if DEBUG
-        Serial.print("# Init node ");
-        Serial.println(i + 1);
-        #endif
+        robot_initWheel(wheel);
     }
 
-    #if DEBUG
-    Serial.println("# All nodes ready");
+    #if DEBUGMODE
+    Serial.println("@E01: Robot movement is ready.");
     #endif
+}
+
+void robot_initCAN(uint16_t baudrate)
+{
+    CAN.begin();
+    CAN.baudConfig(baudrate);
+    CAN.setMode(NORMAL);
+    delay(100);
+}
+
+void robot_initWheel(uint8_t wheel)
+{
+    robot_velocityMode(wheel);
+    robot_motorPowerOn(wheel);
+    robot_motorStart(wheel);
 }
 
 byte robot_nodeAdress(uint8_t wheel)
@@ -42,17 +52,9 @@ byte robot_nodeAdress(uint8_t wheel)
     return nodeAdress[wheel];
 }
 
-void robot_initNode(uint8_t wheel)
-{
-    robot_velocityMode(wheel);
-    robot_motorPowerOn(wheel);
-    robot_motorStart(wheel);
-    robot_setMotorSpeed(wheel, 0);
-}
-
 void robot_velocityMode(uint8_t wheel)
 {
-    #if DEBUG
+    #if DEBUGMODE
     Serial.println("# Motor velocity mode");
     #endif
 
@@ -69,7 +71,7 @@ void robot_velocityMode(uint8_t wheel)
 
 void robot_motorPowerOn(uint8_t wheel)
 {
-    #if DEBUG
+    #if DEBUGMODE
     Serial.println("# Motor power on");
     #endif
 
@@ -89,7 +91,7 @@ void robot_motorPowerOn(uint8_t wheel)
 
 void robot_motorStart(uint8_t wheel)
 {
-    #if DEBUG
+    #if DEBUGMODE
     Serial.println("# Motor start");
     #endif
 
@@ -116,7 +118,7 @@ void robot_motorStart(uint8_t wheel)
 
 void robot_setMotorSpeed(uint8_t wheel, int16_t speed)
 {
-    #if DEBUG
+    #if DEBUGMODE
     Serial.print("# Motor speed: "); Serial.println(speed);
     #endif
 
@@ -131,7 +133,7 @@ void robot_setMotorSpeed(uint8_t wheel, int16_t speed)
 
 void robot_quickStop(uint8_t wheel)
 {
-    #if DEBUG
+    #if DEBUGMODE
     Serial.println("# Motor quickstop");
     #endif
 
@@ -156,7 +158,7 @@ void robot_command(uint8_t wheel, byte data[8])
     CAN.send_0();
     delay(10);
 
-    #if DEBUG
+    #if DEBUGMODE
     for (int i = 0; i < 8; i++)
     {
         Serial.print(data[i], HEX);
