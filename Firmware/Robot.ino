@@ -14,7 +14,7 @@
 #include <CAN.h>
 #include <SPI.h>
 
-#define DEBUGMODE 0
+#define DEBUGMODE 0  // Set to 1 to enable debugging output
 #define CAN_BUS_SPEED 1000  // 1Mbaud
 
 void robot_begin()
@@ -22,7 +22,7 @@ void robot_begin()
     robot_initCAN(CAN_BUS_SPEED);
 
     #if DEBUGMODE
-    Serial.println("@E01: Robot movement is ready.");
+    Serial.println("@A01: Robot movement is ready.");
     #endif
 }
 
