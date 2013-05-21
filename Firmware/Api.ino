@@ -29,6 +29,11 @@ void api_init()
 // ============================================================================
 // custom functions:
 
+/**
+ * Start the engines
+ *
+ * Usage: "start"
+ */
 void api_start()
 {
     for (int i = 0; i < 4; i++)
@@ -37,6 +42,11 @@ void api_start()
     }
 }
 
+/**
+ * Perform a quick stop
+ *
+ * Usage: "stop"
+ */
 void api_stop()
 {
     for (int i = 0; i < 4; i++)
@@ -45,6 +55,13 @@ void api_stop()
     }
 }
 
+/**
+ * Set the desired velocity for each robot wheel.
+ *
+ * Usage: "v [wheel 1] [wheel 2] [wheel 3] [wheel 4]"
+ * Range: -25000...25000
+ * Unit:  steps/second
+ */
 void api_v()
 {
     int v[4] = {0, 0, 0, 0};
