@@ -19,7 +19,6 @@ void loop()
 {
     api_update();
     // readCanMessages();
-    // delay(10);
 }
 
 /**
