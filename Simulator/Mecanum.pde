@@ -1,3 +1,7 @@
+//
+// Mecanum.pde
+//
+
 class MecanumVehicle
 {
     int x, y;
@@ -49,8 +53,8 @@ class MecanumVehicle
 
     void move(float vx, float vy, float omega)
     {
-        float s1 = (vy + vx);
-        float s2 = (vy - vx);
+        float s1 = vy + vx;
+        float s2 = vy - vx;
 
         wheel[0] = s1 + omega;
         wheel[1] = s2 - omega;
@@ -67,7 +71,6 @@ class MecanumVehicle
                 fastest = value;
             }
         }
-
         if (fastest > 1.0)
         {
             for (int i = 0; i < 4; i++)
