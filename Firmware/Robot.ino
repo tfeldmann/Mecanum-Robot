@@ -21,11 +21,6 @@ void robot_begin()
 {
     robot_initCAN(CAN_BUS_SPEED);
 
-    for (int wheel = 0; wheel < 4; wheel++)
-    {
-        robot_initWheel(wheel);
-    }
-
     #if DEBUGMODE
     Serial.println("@E01: Robot movement is ready.");
     #endif
@@ -39,7 +34,7 @@ void robot_initCAN(uint16_t baudrate)
     delay(100);
 }
 
-void robot_initWheel(uint8_t wheel)
+void robot_startWheel(uint8_t wheel)
 {
     robot_velocityMode(wheel);
     robot_motorPowerOn(wheel);

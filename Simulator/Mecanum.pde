@@ -87,6 +87,5 @@ class MecanumVehicle
         }
 
         serialSend("@v" + wheelstring);
-        // println("@v" + wheelstring);
     }
 };

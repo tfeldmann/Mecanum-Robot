@@ -38,7 +38,7 @@ void api_start()
 {
     for (int wheel = 0; wheel < 4; wheel++)
     {
-        robot_initWheel(wheel);
+        robot_startWheel(wheel);
     }
 }
 

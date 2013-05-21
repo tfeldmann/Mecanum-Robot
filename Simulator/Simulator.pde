@@ -12,7 +12,6 @@ ControllSlider throttle;
 ControllButton stopButton;
 
 Serial serial;
-boolean engine = false;
 
 void setup()
 {
@@ -46,7 +45,8 @@ void setupJoystick()
     throttle = device.getSlider("z");
     throttle.setTolerance(0.05);
 
-    device.plug(this, "toggleEngine", ControllIO.ON_PRESS, 0);
+    device.plug(this, "startEngine", ControllIO.ON_PRESS, 0);
+    device.plug(this, "stopEngine", ControllIO.ON_RELEASE, 0);
 }
 
 void draw()
@@ -58,22 +58,19 @@ void draw()
         translation.getY(),
         rotation.getValue());
     vehicle.draw();
-    vehicle.sendToDevice((throttle.getValue() + 1.0) * 0.5);
+    vehicle.sendToDevice(1 - (throttle.getValue() + 1.0) * 0.5);
 }
 
-void toggleEngine()
+void startEngine()
 {
-    engine = !engine;
-    if (!engine)
-    {
-        serialSend("@start");
-    }
-    else
-    {
-        serialSend("@stop");
-    }
+    serialSend("@start");
 }
 
+void stopEngine()
+{
+    serialSend("@stop");
+    vehicle.move(0, 0, 0);
+}
 
 /**
  * Use this function to send a command to the device
@@ -89,8 +86,7 @@ void serialSend(String cmd)
 }
 
 /**
- * This function forwards reveived serial input to
- * the currently active view.
+ * This function prints received serial input
  */
 void serialEvent(Serial serial)
 {
