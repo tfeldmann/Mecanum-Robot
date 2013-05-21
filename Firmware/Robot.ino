@@ -2,13 +2,13 @@
 // Robot.ino
 //
 //
-//    Rad 4                Rad 1
+//   Wheel 4               Wheel 1
 //     +--------------------+
 //     |                    |
 //     |               Arm  | -->
 //     |                    |
 //     +--------------------+
-//    Rad 3                Rad 2
+//   Wheel 3               Wheel 2
 //
 
 #define DEBUG     0
