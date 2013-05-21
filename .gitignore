@@ -1,8 +1,5 @@
-
 *.sublime-project
-
 *.sublime-workspace
-
 *.class
-
 *.java
+sketch.properties
