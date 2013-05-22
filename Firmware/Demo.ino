@@ -43,15 +43,28 @@ CurveResult circle_translation_only(float t)
     return result;
 }
 
-CurveResult circle_with_rotation(float t)
+CurveResult circle_with_rotation_forward(float t)
 {
     float timeStretch = 0.1;
 
     CurveResult result;
     result.finished = false;
-    result.omega = -0.3;
+    result.omega = -0.61;
     result.vx = 0;
     result.vy = 1;
+
+    return result;
+}
+
+CurveResult circle_with_rotation_sideways(float t)
+{
+    float timeStretch = 0.1;
+
+    CurveResult result;
+    result.finished = false;
+    result.omega = -0.5;
+    result.vx = -1;
+    result.vy = 0;
 
     return result;
 }
@@ -73,7 +86,8 @@ void demo_update()
     float t = (millis() - starttime) / 1000.0;
 
     // CurveResult result = circle_translation_only(t);
-    CurveResult result = circle_with_rotation(t);
+    CurveResult result = circle_with_rotation_forward(t);
+    // CurveResult result = circle_with_rotation_sideways(t);
 
     // stop when demo is finished
     if (result.finished) demo_stop();
