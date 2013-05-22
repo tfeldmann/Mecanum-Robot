@@ -5,6 +5,8 @@
 // /_/  /_/\___/\___/\__,_/_/ /_/\__,_/_/ /_/ /_/
 //
 
+#include "types.h"
+
 void setup()
 {
     Serial.begin(115200);
@@ -15,4 +17,5 @@ void setup()
 void loop()
 {
     api_update();
+    demo_update();
 }
