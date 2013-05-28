@@ -22,7 +22,7 @@ void api_begin()
     serialCommand.addCommand("@start", api_start);
     serialCommand.addCommand("@stop", api_stop);
     serialCommand.addCommand("@v", api_v);
-    serialCommand.addCommand("@demo", api_demostart);
+    serialCommand.addCommand("@demo", api_demo);
     serialCommand.setDefaultHandler(api_unknown);
 }
 
@@ -74,7 +74,7 @@ void api_v()
     robot_setMotorSpeed(v);
 }
 
-void api_demostart()
+void api_demo()
 {
     demo_start();
 }

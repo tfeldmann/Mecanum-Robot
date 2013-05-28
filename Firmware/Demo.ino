@@ -2,27 +2,6 @@
 // Demo.ino
 //
 
-boolean active = false;
-unsigned long starttime;
-
-// =============================================================================
-// Helper structures
-
-void wheelVelocities(float *velocities, float vx, float vy, float omega)
-{
-    float s1 = vy - vx;
-    float s2 = vy + vx;
-
-    velocities[0] = s1 + omega;
-    velocities[1] = s2 - omega;
-    velocities[2] = s1 - omega;
-    velocities[3] = s2 + omega;
-}
-
-
-// =============================================================================
-// Define the demos
-
 // speed multiplier: 5000, timeStretch 0.093
 CurveResult circle_translation_only(float t)
 {
@@ -73,10 +52,16 @@ CurveResult circle_with_rotation_sideways(float t)
 // =============================================================================
 // Demo execution code
 
+boolean active = false;
+unsigned long starttime;
+CurveResult (*demo)(float);
+
 void demo_start()
 {
     starttime = millis();
     active = true;
+
+    demo = &circle_translation_only;
 }
 
 void demo_update()
@@ -84,10 +69,7 @@ void demo_update()
     if (!active) return;
 
     float t = (millis() - starttime) / 1000.0;
-
-    // CurveResult result = circle_translation_only(t);
-    CurveResult result = circle_with_rotation_forward(t);
-    // CurveResult result = circle_with_rotation_sideways(t);
+    CurveResult result = (*demo)(t);
 
     // stop when demo is finished
     if (result.finished) demo_stop();
@@ -108,4 +90,19 @@ void demo_stop()
 {
     active = false;
     robot_quickStop();
+}
+
+
+// =============================================================================
+// Helper structures
+
+void wheelVelocities(float *velocities, float vx, float vy, float omega)
+{
+    float s1 = vy - vx;
+    float s2 = vy + vx;
+
+    velocities[0] = s1 + omega;
+    velocities[1] = s2 - omega;
+    velocities[2] = s1 - omega;
+    velocities[3] = s2 + omega;
 }
