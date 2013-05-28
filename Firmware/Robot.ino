@@ -110,7 +110,7 @@ void robot_startMotor(uint8_t wheel)
 {
     robot_velocityMode(wheel);
     robot_motorPowerOn(wheel);
-    robot_motorStart(wheel);
+    robot_motorVelocitySettings(wheel);
 }
 
 void robot_velocityMode(uint8_t wheel)
@@ -123,7 +123,7 @@ void robot_velocityMode(uint8_t wheel)
         {0x2B, 0x40, 0x60, 0x00, 0x0F, 0x00, 0x00, 0x00},  // CONTROLWORD RES:0 RES:0 RES:0 RES:0 RES:0 RES:0 MS5:0 HAT:0 FTR:0 MS3:0 MS2:0 MS1:0 ENO:1 QUS:1 ENV:1 SWO:1
         {0x2F, 0x60, 0x60, 0x00, 0x02, 0x00, 0x00, 0x00}   // MODE OF OPERATION
     };
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 2; i++)
     {
         robot_command(wheel, cmd[i]);
     }
@@ -146,7 +146,7 @@ void robot_motorPowerOn(uint8_t wheel)
     }
 }
 
-void robot_motorStart(uint8_t wheel)
+void robot_motorVelocitySettings(uint8_t wheel)
 {
     #if DEBUGMODE
     Serial.println("# Motor start");
