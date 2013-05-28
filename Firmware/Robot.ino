@@ -119,9 +119,8 @@ void robot_velocityMode(uint8_t wheel)
     Serial.println("# Motor velocity mode");
     #endif
 
-    byte cmd[3][8] = {
+    byte cmd[2][8] = {
         {0x2B, 0x40, 0x60, 0x00, 0x0F, 0x00, 0x00, 0x00},  // CONTROLWORD RES:0 RES:0 RES:0 RES:0 RES:0 RES:0 MS5:0 HAT:0 FTR:0 MS3:0 MS2:0 MS1:0 ENO:1 QUS:1 ENV:1 SWO:1
-        {0x40, 0x41, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00},  // STATUSWORD
         {0x2F, 0x60, 0x60, 0x00, 0x02, 0x00, 0x00, 0x00}   // MODE OF OPERATION
     };
     for (int i = 0; i < 3; i++)
@@ -136,15 +135,12 @@ void robot_motorPowerOn(uint8_t wheel)
     Serial.println("# Motor power on");
     #endif
 
-    byte cmd[6][8] = {
-        {0x40, 0x41, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00},  // STATUSWORD
+    byte cmd[3][8] = {
         {0x2B, 0x40, 0x60, 0x00, 0x06, 0x00, 0x00, 0x00},  // CONTROLWORD RES:0 RES:0 RES:0 RES:0 RES:0 RES:0 MS5:0 HAT:0 FTR:0 MS3:0 MS2:0 MS1:0 ENO:0 QUS:1 ENV:1 SWO:0
         {0x2B, 0x40, 0x60, 0x00, 0x07, 0x00, 0x00, 0x00},  // CONTROLWORD RES:0 RES:0 RES:0 RES:0 RES:0 RES:0 MS5:0 HAT:0 FTR:0 MS3:0 MS2:0 MS1:0 ENO:0 QUS:1 ENV:1 SWO:1
-        {0x40, 0x41, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00},  // STATUSWORD
         {0x2B, 0x40, 0x60, 0x00, 0x0F, 0x00, 0x00, 0x00},  // CONTROLWORD RES:0 RES:0 RES:0 RES:0 RES:0 RES:0 MS5:0 HAT:0 FTR:0 MS3:0 MS2:0 MS1:0 ENO:1 QUS:1 ENV:1 SWO:1
-        {0x40, 0x41, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00}   // STATUSWORD
     };
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 3; i++)
     {
         robot_command(wheel, cmd[i]);
     }
@@ -156,9 +152,7 @@ void robot_motorStart(uint8_t wheel)
     Serial.println("# Motor start");
     #endif
 
-    byte cmd[13][8] = {
-        {0x40, 0x41, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00},  // STATUSWORD
-        {0x40, 0x40, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00},  // CONTROLWORD RES:0 RES:0 RES:0 RES:0 RES:0 RES:0 MS5:0 HAT:0 FTR:0 MS3:0 MS2:0 MS1:0 ENO:0 QUS:0 ENV:0 SWO:0
+    byte cmd[11][8] = {
         {0x23, 0x46, 0x60, 0x01, 0x00, 0x00, 0x00, 0x00},  // VL VELOCITY MIN AMOUNT
         {0x23, 0x46, 0x60, 0x02, 0xA8, 0x61, 0x00, 0x00},  // VL VELOCITY MAX AMOUNT
         {0x2B, 0x40, 0x60, 0x00, 0x0F, 0x01, 0x00, 0x00},  // CONTROLWORD RES:0 RES:0 RES:0 RES:0 RES:0 RES:0 MS5:0 HAT:1 FTR:0 MS3:0 MS2:0 MS1:0 ENO:1 QUS:1 ENV:1 SWO:1
@@ -171,7 +165,7 @@ void robot_motorStart(uint8_t wheel)
         {0x2B, 0x4A, 0x60, 0x02, 0x01, 0x00, 0x00, 0x00},  // VL QUICK STOP DELTA TIME
         {0x2B, 0x40, 0x60, 0x00, 0x0F, 0x00, 0x00, 0x00}   // CONTROLWORD RES:0 RES:0 RES:0 RES:0 RES:0 RES:0 MS5:0 HAT:0 FTR:0 MS3:0 MS2:0 MS1:0 ENO:1 QUS:1 ENV:1 SWO:1
     };
-    for (int i = 0; i < 13; i++)
+    for (int i = 0; i < 11; i++)
     {
         robot_command(wheel, cmd[i]);
     }
@@ -183,14 +177,12 @@ void robot_quickStopWheel(uint8_t wheel)
     Serial.println("# Motor quickstop");
     #endif
 
-    byte cmd[5][8] = {
-        {0x40, 0x40, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00},  // CONTROLWORD RES:0 RES:0 RES:0 RES:0 RES:0 RES:0 MS5:0 HAT:0 FTR:0 MS3:0 MS2:0 MS1:0 ENO:0 QUS:0 ENV:0 SWO:0
+    byte cmd[3][8] = {
         {0x2B, 0x40, 0x60, 0x00, 0x0F, 0x01, 0x00, 0x00},  // CONTROLWORD RES:0 RES:0 RES:0 RES:0 RES:0 RES:0 MS5:0 HAT:1 FTR:0 MS3:0 MS2:0 MS1:0 ENO:1 QUS:1 ENV:1 SWO:1
-        {0x40, 0x40, 0x60, 0x00, 0x00, 0x00, 0x00, 0x00},  // CONTROLWORD RES:0 RES:0 RES:0 RES:0 RES:0 RES:0 MS5:0 HAT:0 FTR:0 MS3:0 MS2:0 MS1:0 ENO:0 QUS:0 ENV:0 SWO:0
         {0x2B, 0x40, 0x60, 0x00, 0x0B, 0x01, 0x00, 0x00},  // CONTROLWORD RES:0 RES:0 RES:0 RES:0 RES:0 RES:0 MS5:0 HAT:1 FTR:0 MS3:0 MS2:0 MS1:0 ENO:1 QUS:0 ENV:1 SWO:1
         {0x2B, 0x40, 0x60, 0x00, 0x0F, 0x01, 0x00, 0x00}   // CONTROLWORD RES:0 RES:0 RES:0 RES:0 RES:0 RES:0 MS5:0 HAT:1 FTR:0 MS3:0 MS2:0 MS1:0 ENO:1 QUS:1 ENV:1 SWO:1
     };
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 3; i++)
     {
         robot_command(wheel, cmd[i]);
     }
