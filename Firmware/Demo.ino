@@ -99,7 +99,7 @@ void demo_update()
     {
         Serial.print((int)(velocities[i] * 5000));
         Serial.print("\t");
-        robot_setMotorSpeed(i, (int)(velocities[i] * 5000));
+        robot_setSingleMotorSpeed(i, (int)(velocities[i] * 5000));
     }
     Serial.println();
 }
@@ -107,8 +107,5 @@ void demo_update()
 void demo_stop()
 {
     active = false;
-    for (int i = 0; i < 4; i++)
-    {
-        robot_quickStop(i);
-    }
+    robot_quickStop();
 }

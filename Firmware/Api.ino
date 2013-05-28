@@ -37,10 +37,7 @@ void api_begin()
  */
 void api_start()
 {
-    for (int wheel = 0; wheel < 4; wheel++)
-    {
-        robot_startWheel(wheel);
-    }
+    robot_startMotors();
 }
 
 /**
@@ -51,10 +48,7 @@ void api_start()
 void api_stop()
 {
     demo_stop();
-    for (int wheel = 0; wheel < 4; wheel++)
-    {
-        robot_quickStop(wheel);
-    }
+    robot_quickStop();
 }
 
 /**
@@ -77,11 +71,7 @@ void api_v()
         }
         v[wheel] = atoi(value);
     }
-
-    for (int wheel = 0; wheel < 4; wheel++)
-    {
-        robot_setMotorSpeed(wheel, v[wheel]);
-    }
+    robot_setMotorSpeed(v);
 }
 
 void api_demostart()
