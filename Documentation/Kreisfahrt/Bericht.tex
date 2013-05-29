@@ -17,7 +17,7 @@
 \maketitle
 \newpage
 
-%=============================================================================================================
+% =============================================================================
 \section{Einleitung}
 Der Mecanum-Roboter ist ein omnidirektionales Fahrzeug. Er kann ohne Lenkung aus jeder Position in eine beliebige Richtung fahren. Grund dafür sind die verwendeten Allseitenräder -- Mecanum-Räder -- auf deren Umlauffläche 15 weitere tonnenförmige Hilfsräder angebracht sind. Zur Steuerung des Roboters ist es notwendig ein mathematisches Modell zur Beschreibung der einzelnen Bewegungen der Räder aufzustellen.
 
@@ -47,7 +47,7 @@ Die Koordinaten des Roboters liegen auf den Raumkoordinaten. Die parallele Ausri
 Das Koordinatensystem des Roboters ist um $90^\circ$ zum Raumkoodinatensystem gedreht. Bei der Kreisfahrt dreht sich der Roboter seitlich mit.
 
 
-% =====================================================================================================================
+% =============================================================================
 
 \section{Mathematik zur Kinematik / Dynamik}
 Dieses Kapitel beschreibt die Mathematik hinter der Kinematik und Dynamik -- Bewegung unter Einwirkung von Kräften -- des Mecanum-Roboters. Jede Bewegung setzt sich aus einer translatorischen und einer rotatorischen Bewegung zusammen. So ist das auch das Kapitel gegliedert.
@@ -67,12 +67,12 @@ Wirken Kraft und Geschwindigkeit entlang einer Koordinatenachse, haben beide Vek
 
 Die Kraftvektor in $x$- und $y$-Richtung setzt sich zusammen als die Summe der einzelnen $x$- und $y$-Vektoren der vier Räder:
 \begin{align*}
-\sum_{i=1}^4 F_{iy} &= \sum_{i=1}^4 F_i \sin \alpha \\
-&= \sum_{i=1}^4 SIG \cdot K_i F_{Ti} \sin^2 \alpha \\
-&= \sum_{i=1}^4 SIG \cdot \frac{1}{2} K_i F_{Ti} \\
-\sum_{i=1}^4 F_{ix} &= \sum_{i=1}^4 F_i \cos \alpha \\
-&= \sum_{i=1}^4 (-1)^i SIG \cdot K_i F_{Ti} \sin \alpha \cos \alpha \\
-&= \sum_{i=1}^4 (-1)^i SIG \cdot \frac{1}{2} K_i F_{Ti} \\
+    \sum_{i=1}^4 F_{iy} &= \sum_{i=1}^4 F_i \sin \alpha                 \\
+    &= \sum_{i=1}^4 SIG \cdot K_i F_{Ti} \sin^2 \alpha                  \\
+    &= \sum_{i=1}^4 SIG \cdot \frac{1}{2} K_i F_{Ti}                    \\
+    \sum_{i=1}^4 F_{ix} &= \sum_{i=1}^4 F_i \cos \alpha                 \\
+    &= \sum_{i=1}^4 (-1)^i SIG \cdot K_i F_{Ti} \sin \alpha \cos \alpha \\
+    &= \sum_{i=1}^4 (-1)^i SIG \cdot \frac{1}{2} K_i F_{Ti}             \\
 \end{align*}
 
 SIG steht als Vorzeichenkonventionen für die Drehrichtung der Räder. Diese werden in der Steuerung direkt implementiert und werden daher bei den folgenden Rechnungen nicht weiter betrachtet.
@@ -81,14 +81,14 @@ Der Winkel $ \alpha $ liegt zwischen den Drehachsen der Rollen und der Räder ($
 Für eine translatorisch Bewegung müssen sich jeweils die diagonalen Räder (1, 3 und 2, 4) mit derselben Geschwindigkeit drehen. Entsprechen müssen ihre Kraftvektoren $F_{T1, 3} / F_{T2, 4}$ gleich groß sein.
 Durch Auflösen der Summenzeichen erhält man ein Gleichungssystem:
 \begin{align*}
-F_x &= - K_i F_{T1, 3} + K_i F_{T2, 4} \\
-F_y &= K_i F_{T1, 3}   + K_i F_{T2, 4}
+    F_x &= - K_i F_{T1, 3} + K_i F_{T2, 4} \\
+    F_y &= K_i F_{T1, 3}   + K_i F_{T2, 4}
 \end{align*}
 
 Nach Umstellen erhält man $F_{T1, 3}$ und $F_{T2, 4}$ und kann somit auch direkt die Geschwindigkeiten berechnen:
 \begin{align*}
-F_{T1, 3} &= \frac{F_y + F_x}{K_i} &\Rightarrow v_{T1, 3} &= \frac{v_y + v_x}{K_i}\\
-F_{T2, 4} &= \frac{F_y - F_x}{K_i} &\Rightarrow v_{T2, 4} &= \frac{v_y - v_x}{K_i}\\
+    F_{T1, 3} &= \frac{F_y + F_x}{K_i} &\Rightarrow v_{T1, 3} &= \frac{v_y + v_x}{K_i} \\
+    F_{T2, 4} &= \frac{F_y - F_x}{K_i} &\Rightarrow v_{T2, 4} &= \frac{v_y - v_x}{K_i} \\
 \end{align*}
 
 Der Faktor $K_i$ setzt sich aus unterschiedlichen Faktoren zusammen, welche die durch das Motormoment erzeugten treibenden Kräfte beeinflussen und wird für den Boden der Werkstatt empirisch ermittelt.
@@ -98,13 +98,13 @@ Der Faktor $K_i$ setzt sich aus unterschiedlichen Faktoren zusammen, welche die 
 Die Rotation des Mecanum-Roboters um sein Zentrum kann durch die Drehrichtung der Räder bei gleicher Geschwindigkeit beschrieben werden.
 Für eine Drehung im Uhrzeigersinn drehen Rad 1 und 2 rückwärts, Rad 3 und 4 vorwärts. Für eine Drehung gegen den Uhrzeigersinn entsprechend umgekehrt.
 \begin{align*}
-v_{ref} &= K_i \cdot r \cdot \omega \\
-v_1 = v_4 &= - v_{ref} \\
-v_2 = v_3 &= + v_{ref}
+    v_{ref} &= K_i \cdot r \cdot \omega \\
+    v_1 = v_4 &= - v_{ref}              \\
+    v_2 = v_3 &= + v_{ref}
 \end{align*}
 
 
-% =====================================================================================================================
+% =============================================================================
 
 \section{Schlussteil}
 \subsection{Diskussion der Ergebnisse}
