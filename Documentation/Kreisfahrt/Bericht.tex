@@ -8,6 +8,7 @@
 \usepackage{nicefrac}
 \usepackage{graphicx, wrapfig, float}
 \usepackage[onehalfspacing]{setspace}
+\usepackage{paralist}  % \begin{compactitem}
 
 \title{Kreisfahrten mit einem Roboter mit Mecanum-Rädern}
 \author{Manuel Fehmer \\ Thomas Feldmann \\ Marlene Feldmann \\ Carsten Hussmann}
@@ -35,7 +36,7 @@ Der Mecanum-Roboter fährt einen normalen Viertelkreis. Das Koordinatensystem de
     \includegraphics[width=.6\textwidth]{Viertelkreis-translatorisch}
     \caption{Translatorische Kreisfahrt}
 \end{figure}
-Die Koordinaten des Roboters liegen auf den Raumkoordinaten. Die parallele Ausrichtung bleibt während der Kreisfahrt bestehen. Der Roboter fährt den Viertelkreis mit der "Nase nach vorne".
+Die Koordinaten des Roboters liegen auf den Raumkoordinaten. Die parallele Ausrichtung bleibt während der Kreisfahrt bestehen.
 
 \vspace{2cm}
 \begin{figure}[H]
@@ -107,15 +108,18 @@ v_2 = v_3 &= + v_{ref}
 
 \section{Schlussteil}
 \subsection{Diskussion der Ergebnisse}
-Schwierigkeiten
-Bei der Umsetzung der Kreisfahren treten zahlreiche Schwierigkeiten auf, auf die über die Programmierung kein Einfluss zu nehmen ist.
+???
 
-Untergrund uneben / Unebenheiten
-keine perfekt planaren Fläche
-Schmutz ändert Reibkoeffizient
-Motorenleistung zu schwach, verlieren Schritte
-Räder verhaken im Riementrieb
-Lagerung der Rollen auf den Rädern mangelhaft
-Befestigung und Lagerung der Rollen mangelhaft
+\subsection{Schwierigkeiten}
+Bei der Umsetzung der Kreisfahren treten zahlreiche Schwierigkeiten auf, auf die über die Programmierung kein Einfluss zu nehmen ist.
+\begin{compactitem}
+    \item Untergrund uneben / Unebenheiten
+    \item keine perfekt planaren Fläche
+    \item Schmutz ändert Reibkoeffizient
+    \item Motorenleistung zu schwach, verlieren Schritte
+    \item Räder verhaken im Riementrieb
+    \item Lagerung der Rollen auf den Rädern mangelhaft
+    \item Befestigung und Lagerung der Rollen mangelhaft
+\end{compactitem}
 
 \end{document}
