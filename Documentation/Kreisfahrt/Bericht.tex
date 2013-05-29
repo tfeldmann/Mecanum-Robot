@@ -55,7 +55,7 @@ Dieses Kapitel beschreibt die Mathematik hinter der Kinematik und Dynamik -- Bew
 Vereinfacht kann die translatorische Bewegung des Mecanum-Roboters durch die Drehrichtung und Drehgeschwindigkeit der Mecanum-Räder beschrieben werden. Abhängig von den unterschiedlichen Kombination fährt der Roboter entlang des Vektors für die Gesamtbewegung.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.6\textwidth]{kraefte}
+    \includegraphics[width=.6\textwidth]{Kraefte-am-Rad}
     \caption{Kräftegleichgewicht an einem Mecanum-Rad.}
 \end{figure}
 
@@ -108,7 +108,7 @@ Für eine Drehung im Uhrzeigersinn drehen Rad 1 und 2 rückwärts, Rad 3 und 4 v
 Dieses Kapitel befasst sich mit der Koordinatentransformation vom ortsfesten Bezugskoordinatensystem zum Koordinatensystem des Mecanum-Roboters. \\
 Die translatorische Verschiebung wird durch den Vektor $\underline T$ beschrieben.
 \begin{align*}
-\underline T = 
+\underline T =
 \begin{bmatrix}
 x_{T}\\
 y_{T}\\
@@ -155,7 +155,7 @@ y_{A} + x_{T} \cdot \sin{\Psi}+y_{T}  \cdot \cos{\Psi}\\
 
 % =============================================================================
 \section{Programmierung}
-Die Programmierung des Roboters
+Die Steuerung des Roboters übernimmt ein Arduino Uno mit einem CAN-BUS Shield der Firma Sparkfun.
 
 
 % =============================================================================
