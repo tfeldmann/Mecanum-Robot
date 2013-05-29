@@ -106,7 +106,7 @@ Für eine Drehung im Uhrzeigersinn drehen Rad 1 und 2 rückwärts, Rad 3 und 4 v
 % =============================================================================
 \section{Koordinatentransformation}
 Dieses Kapitel befasst sich mit der Koordinatentransformation vom ortsfesten Bezugskoordinatensystem zum Koordinatensystem des Mecanum-Roboters. \\
-Die translatorische Verschiebung wird durch den Vektor $\underline T$ beschrieben.\\
+Die translatorische Verschiebung wird durch den Vektor $\underline T$ beschrieben.
 \begin{align*}
 \underline T = 
 \begin{bmatrix}
@@ -115,7 +115,7 @@ y_{T}\\
 0
 \end{bmatrix}
 \end{align*}
-Rotationsmatrix $\underline R$ um den Gierwinkel $\Psi$\\
+Rotationsmatrix $\underline R$ um den Gierwinkel $\Psi$.
 \begin{align*}
  \underline R_{\Psi} =
 \begin{bmatrix}
@@ -124,7 +124,34 @@ Rotationsmatrix $\underline R$ um den Gierwinkel $\Psi$\\
   0 & 0 & 1
 \end{bmatrix}
 \end{align*} 
-
+Positionsvektor des Roboter $\underline P$
+\begin{align*}
+\underline P = \underline R_{\Psi} \cdot \underline T =
+\begin{bmatrix}
+  \cos{\Psi} & -\sin{\Psi} & 0\\
+  \sin{\Psi} & \cos{\Psi} & 0\\
+  0 & 0 & 1
+\end{bmatrix}\cdot
+\begin{bmatrix}
+x_{T}\\
+y_{T}\\
+0
+\end{bmatrix}=
+\begin{bmatrix}
+x_{T} \cdot \cos{\Psi}-y_{T} \cdot \sin{\Psi}\\
+x_{T} \cdot \sin{\Psi}+y_{T}  \cdot \cos{\Psi}\\
+0
+\end{bmatrix}
+\end{align*}
+Als Ergänzung wird die Transformation bis zum Koordinatenursprung des montierten Roboterarms weitergeführt.
+\begin{align*}
+\underline T_{A} + \underline P =
+\begin{bmatrix}
+x_{T} \cdot \cos{\Psi}-y_{T} \cdot \sin{\Psi}\\
+y_{A} + x_{T} \cdot \sin{\Psi}+y_{T}  \cdot \cos{\Psi}\\
+0
+\end{bmatrix}
+\end{align*}
 
 % =============================================================================
 \section{Programmierung}
