@@ -103,11 +103,13 @@ v_2 = v_3 &= + v_{ref}
 \end{align*}
 
 
+% =====================================================================================================================
+
 \section{Schlussteil}
-Diskussion der Ergebnisse
-asc
+\subsection{Diskussion der Ergebnisse}
 Schwierigkeiten
 Bei der Umsetzung der Kreisfahren treten zahlreiche Schwierigkeiten auf, auf die über die Programmierung kein Einfluss zu nehmen ist.
+
 Untergrund uneben / Unebenheiten
 keine perfekt planaren Fläche
 Schmutz ändert Reibkoeffizient
@@ -115,62 +117,5 @@ Motorenleistung zu schwach, verlieren Schritte
 Räder verhaken im Riementrieb
 Lagerung der Rollen auf den Rädern mangelhaft
 Befestigung und Lagerung der Rollen mangelhaft
-
-% \section{Dimensionierung}
-% \subsection{Ermitteln der Dimensionierungsfaktoren}
-% Durch die erhöhte Lochleistung treten auch höhere Kräfte und damit höhere Spannungen im Material auf.
-% Da das Material innerhalb der Baureihe gleich bleiben soll, muss die Geometrie der Bürolocher an die neuen Anforderungen angepasst werden.
-
-% Für die im Hebelarm auftretende Biegespannung während des Lochens gilt folgende Beziehung:
-% $$ \sigma_b = \frac{M}{W} = \frac{F \cdot l}{W} $$
-
-% Wobei $\sigma_b$ die Biegespannung, $M$ das angreifende Biegemoment und $W$ das Widerstandsmoment ist.
-% Das Biegemoment lässt sich durch die Kraft $F$ mit Hebelarmlänge $l$ ausdrücken.
-
-% Ausgedrückt in Dimensionierungsfaktoren ($\varphi$) erhält man
-% \begin{equation}
-%     \varphi_\sigma = \frac{\varphi_F \cdot \varphi_L}{\varphi_L^3} = \frac{\varphi_F}{\varphi_L^2}
-%     \label{eq:dimfakt}
-% \end{equation}
-
-% Es ist wünschenswert, dass in allen Lochergrößen etwa gleich große im Hebelarm Spannungen auftreten. Es soll daher gelten:
-% \begin{equation}
-%     \varphi_\sigma = 1
-%     \label{eq:phisigmaconst}
-% \end{equation}
-
-% Aus den Bedingungen (\ref{eq:dimfakt}) und (\ref{eq:phisigmaconst}) erhält man die Beziehung:
-% $$ \varphi_F = \varphi_L^2 $$
-
-% Daraus ergeben sich die folgenden Dimensionierungsfaktoren für die ersten drei Glieder der Normreihe R10 zu:
-% \begin{table}[htb]
-%     \centering
-%     \begin{tabular}{rl}
-%         R10 & $ \varphi_L $ \\
-%         \hline
-%         1    & $ 1,0  $ \\
-%         1,25 & $ 1,12 $ \\
-%         1,6  & $ 1,26 $
-%     \end{tabular}
-% \end{table}
-
-% % ---------------------------------------------------------------------------------------------------------------------
-% \subsection{Neugestaltung des Bürolochers}
-
-% Die Bürolocher-Baureihe wird wie folgt dimensioniert:
-% \begin{table}[htb]
-%     \centering
-%     \begin{tabular}{lccc}
-%         Maß & Original $[mm]$ & $1,25$-fach $[mm]$ & $1,6$-fach $[mm]$ \\
-%         \hline
-%         Hebelarm   & $200$ & $224$ & $252$ \\
-%         Armbreite  & $40$  & $45$  & $51$  \\
-%         Armhöhe    & $15$  & $17$  & $19$  \\
-%         Wandstärke & $1$   & $1,2$ & $1.6$
-%     \end{tabular}
-% \end{table}
-
-% \vspace{3cm}
-% \includegraphics[width=12cm]{Locher-gesamt.jpg}
 
 \end{document}
