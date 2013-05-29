@@ -2,18 +2,18 @@
 // Demo.ino
 //
 
-// speed multiplier: 5000, timeStretch 0.093
 CurveResult circle_translation_only(float t)
 {
+    // Original: speed multiplier: 5000, timeStretch 0.093
     float timeStretch = 0.093;
 
     CurveResult result;
     result.finished = false;
     result.omega = 0;
-    result.vx = sin(t * timeStretch);
-    result.vy = cos(t * timeStretch);
+    result.vx = -cos(t * timeStretch);
+    result.vy = sin(t * timeStretch);
 
-    // stop after a quarter circle
+    stop after a quarter circle
     if (result.vy < 0)
     {
         result.finished = true;
@@ -28,9 +28,11 @@ CurveResult circle_with_rotation_forward(float t)
 
     CurveResult result;
     result.finished = false;
-    result.omega = -0.61;
+    result.omega = -0.305;
     result.vx = 0;
     result.vy = 1;
+
+    // todo: t>160000 stop
 
     return result;
 }
@@ -41,9 +43,11 @@ CurveResult circle_with_rotation_sideways(float t)
 
     CurveResult result;
     result.finished = false;
-    result.omega = -0.5;
+    result.omega = -0.3;
     result.vx = -1;
     result.vy = 0;
+
+    // todo: time>16
 
     return result;
 }
@@ -60,13 +64,11 @@ void demo_start()
 {
     starttime = millis();
     active = true;
-
-    demo = &circle_translation_only;
 }
 
 void demo_update()
 {
-    if (!active) return;
+    if (!active || demo == NULL) return;
 
     float t = (millis() - starttime) / 1000.0;
     CurveResult result = (*demo)(t);
@@ -79,9 +81,9 @@ void demo_update()
 
     for (int i = 0; i < 4; i++)
     {
-        Serial.print((int)(velocities[i] * 5000));
+        Serial.print((int)(velocities[i] * 10000));
         Serial.print("\t");
-        robot_setSingleMotorSpeed(i, (int)(velocities[i] * 5000));
+        robot_setSingleMotorSpeed(i, (int)(velocities[i] * 10000));
     }
     Serial.println();
 }
@@ -89,12 +91,27 @@ void demo_update()
 void demo_stop()
 {
     active = false;
+    demo = NULL;
     robot_quickStop();
 }
 
+void demo_1()
+{
+    demo = &circle_translation_only;
+    demo_start();
+}
 
-// =============================================================================
-// Helper structures
+void demo_2()
+{
+    demo = &circle_with_rotation_forward;
+    demo_start();
+}
+
+void demo_3()
+{
+    demo = &circle_with_rotation_sideways;
+    demo_start();
+}
 
 void wheelVelocities(float *velocities, float vx, float vy, float omega)
 {
