@@ -4,3 +4,15 @@
 *.java
 sketch.properties
 /Firmware/tests
+
+*.toc
+
+*.gz
+
+*.log
+
+*.fdb_latexmk
+
+*.aux
+
+*.pdf
