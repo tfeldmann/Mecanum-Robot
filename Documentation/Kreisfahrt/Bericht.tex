@@ -66,12 +66,12 @@ Wirken Kraft und Geschwindigkeit entlang einer Koordinatenachse, haben beide Vek
 
 Die Kraftvektor in $x$- und $y$-Richtung setzt sich zusammen als die Summe der einzelnen $x$- und $y$-Vektoren der vier Räder:
 \begin{align*}
-    \sum_{i=1}^4 F_{iy} &= \sum_{i=1}^4 F_i \sin{\alpha} \\
-    &= \sum_{i=1}^4 SIG \cdot K_i F_{Ti} \sin^2{\alpha} \\
-    &= \sum_{i=1}^4 SIG \cdot \frac{1}{2} K_i F_{Ti} \\
-    \sum_{i=1}^4 F_{ix} &= \sum_{i=1}^4 F_i \cos{\alpha} \\
-    &= \sum_{i=1}^4 (-1)^i SIG \cdot K_i F_{Ti} \sin{\alpha} \cos{\alpha} \\
-    &= \sum_{i=1}^4 (-1)^i SIG \cdot \frac{1}{2} K_i F_{Ti} \\
+    \sum_{i=1}^4 F_{iy} &= \sum_{i=1}^4 F_i \sin \alpha                 \\
+    &= \sum_{i=1}^4 SIG \cdot K_i F_{Ti} \sin^2 \alpha                  \\
+    &= \sum_{i=1}^4 SIG \cdot \frac{1}{2} K_i F_{Ti}                    \\
+    \sum_{i=1}^4 F_{ix} &= \sum_{i=1}^4 F_i \cos \alpha                 \\
+    &= \sum_{i=1}^4 (-1)^i SIG \cdot K_i F_{Ti} \sin \alpha \cos \alpha \\
+    &= \sum_{i=1}^4 (-1)^i SIG \cdot \frac{1}{2} K_i F_{Ti}             \\
 \end{align*}
 
 SIG steht als Vorzeichenkonventionen für die Drehrichtung der Räder. Diese werden in der Steuerung direkt implementiert und werden daher bei den folgenden Rechnungen nicht weiter betrachtet.
@@ -95,10 +95,10 @@ Der Faktor $K_i$ setzt sich aus unterschiedlichen Faktoren zusammen, welche die 
 
 \subsection{Rotation}
 Die Rotation des Mecanum-Roboters um sein Zentrum kann durch die Drehrichtung der Räder bei gleicher Geschwindigkeit beschrieben werden.
-Für eine Drehung im Uhrzeigersinn drehen Rad eins und zwei rückwärts, Rad drei und vier vorwärts. Für eine Drehung gegen den Uhrzeigersinn entsprechend umgekehrt.
+Für eine Drehung im Uhrzeigersinn drehen Rad 1 und 2 rückwärts, Rad 3 und 4 vorwärts. Für eine Drehung gegen den Uhrzeigersinn entsprechend umgekehrt.
 \begin{align*}
     v_{ref} &= K_i \cdot r \cdot \omega \\
-    v_1 = v_4 &= - v_{ref} \\
+    v_1 = v_4 &= - v_{ref}              \\
     v_2 = v_3 &= + v_{ref}
 \end{align*}
 
@@ -123,8 +123,8 @@ Rotationsmatrix $\underline R$ um den Gierwinkel $\Psi$.
   \sin{\Psi} & \cos{\Psi} & 0\\
   0 & 0 & 1
 \end{bmatrix}
-\end{align*}
-Positionsvektor des Roboter $\underline P$
+\end{align*} 
+Positionsvektor des Roboter $\underline P$.
 \begin{align*}
 \underline P = \underline R_{\Psi} \cdot \underline T =
 \begin{bmatrix}
@@ -155,9 +155,7 @@ z_{A}
 
 % =============================================================================
 \section{Programmierung}
-Die Steuerung des Roboters übernimmt ein Arduino Uno mit einem CAN-BUS Shield der Firma Sparkfun, die Programmierung erfolgt in C.
-
-Die drei Kreisfahrten werden im Programm implizit, nicht iterativ hinterlegt. Das sorgt für ruckfreie Fahrwege
+Die Steuerung des Roboters übernimmt ein Arduino Uno mit einem CAN-BUS Shield der Firma Sparkfun.
 
 
 % =============================================================================
