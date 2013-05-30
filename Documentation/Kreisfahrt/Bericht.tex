@@ -155,7 +155,21 @@ z_{A}
 
 % =============================================================================
 \section{Programmierung}
-Die Steuerung des Roboters übernimmt ein Arduino Uno mit einem CAN-BUS Shield der Firma Sparkfun.
+Der Roboter wird von einem Arduino Uno gesteuert, daher erfolgt die Programmierung in $C$. Das CAN-BUS Shield von SparkFun wird auf den Arduino aufgesteckt und ermöglicht die Kommunikation mit  den Schrittmotortreibern STMCI47 der Firma Nanotec.
+Für die Umsetzung einer Kreisfahrt gibt es zwei Möglichkeiten:
+
+\begin{enumerate}
+
+\item \emph{Explizit, iterativ:} \\
+Dem Roboter wird in einem festgelegten Takt mit den neuen Sollgeschwindigkeiten für die Räder gespeist. Die Sollgeschwindigkeiten können zur Laufzeit berechnet werden oder aus einer Lookup-Tabelle stammen.
+
+Ein zu langsam eingestellter Takt führt zu polygonalen Fahrverläufen, die den Sollkreis lediglich annähern. Dementsprechend ist diese Methode auch gegenüber Taktänderungen sehr anfällig, welche beispielsweise auftreten, wenn andere Prozesse im Mikrocontroller zu viel Rechenzeit benötigen.
+
+\item \emph{Implizit, funktionell:} \\
+Die Soll-Radgeschwindigkeiten werden als Funktion abhängig von der Zeit seit Beginn der Kreisfahrt definiert. Sie können zu jedem beliebigen Zeitpunkt abgefragt werden. Das erlaubt dem Mikrocontroller seine Rechenzeit frei einzuteilen und resultiert in ruckfreien, flüssigen Bewegungsabläufen.
+\end{enumerate}
+
+Wegen dieser Vorteile wird die implizite Definition der Fahrbewegung implementiert.
 
 
 % =============================================================================
