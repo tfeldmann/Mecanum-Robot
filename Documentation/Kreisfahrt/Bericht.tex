@@ -1,3 +1,9 @@
+% TODO
+%
+% - Fotos der Räder und Anordnung
+% - Fotos des Roboters
+% - Diskussion der Ergebnisse
+
 \documentclass[a4paper]{article}
 
 \usepackage[utf8]{inputenc}
@@ -17,7 +23,6 @@
 \maketitle
 \newpage
 
-% =============================================================================
 \section{Einleitung}
 Der Mecanum-Roboter ist ein omnidirektionales Fahrzeug. Er kann ohne Lenkung aus jeder Position in eine beliebige Richtung fahren. Grund dafür sind die verwendeten Allseitenräder -- Mecanum-Räder -- auf deren Umlauffläche 15 weitere tonnenförmige Hilfsräder angebracht sind. Zur Steuerung des Roboters ist es notwendig ein mathematisches Modell zur Beschreibung der einzelnen Bewegungen der Räder aufzustellen.
 
@@ -45,7 +50,6 @@ Die Koordinaten des Roboters liegen auf den Raumkoordinaten. Die parallele Ausri
 Das Koordinatensystem des Roboters ist um $90^\circ$ zum Raumkoodinatensystem gedreht. Bei der Kreisfahrt dreht sich der Roboter seitlich mit.
 
 
-% =============================================================================
 \section{Mathematik zur Kinematik / Dynamik}
 Dieses Kapitel beschreibt die Mathematik hinter der Kinematik und Dynamik -- Bewegung unter Einwirkung von Kräften -- des Mecanum-Roboters. Jede Bewegung setzt sich aus einer translatorischen und einer rotatorischen Bewegung zusammen. So ist das auch das Kapitel gegliedert.
 
@@ -101,7 +105,6 @@ Für eine Drehung im Uhrzeigersinn drehen Rad 1 und 2 rückwärts, Rad 3 und 4 v
 \end{align*}
 
 
-% =============================================================================
 \section{Koordinatentransformation}
 Dieses Kapitel befasst sich mit der Koordinatentransformation vom ortsfesten Bezugskoordinatensystem zum Koordinatensystem des Mecanum-Roboters. \\
 Die translatorische Verschiebung wird durch den Vektor $\underline T$ beschrieben.
@@ -121,7 +124,7 @@ Rotationsmatrix $\underline R$ um den Gierwinkel $\Psi$.
   \sin{\Psi} & \cos{\Psi} & 0\\
   0 & 0 & 1
 \end{bmatrix}
-\end{align*} 
+\end{align*}
 Positionsvektor des Roboter $\underline P$.
 \begin{align*}
 \underline P = \underline R_{\Psi} \cdot \underline T =
@@ -151,13 +154,12 @@ z_{A}
 \end{bmatrix}
 \end{align*}
 
-% =============================================================================
+
 \section{Programmierung}
 Der Roboter wird von einem Arduino Uno gesteuert, daher erfolgt die Programmierung in $C$. Das CAN-BUS Shield von SparkFun wird auf den Arduino aufgesteckt und ermöglicht die Kommunikation mit  den Schrittmotortreibern STMCI47 der Firma Nanotec.
 Für die Umsetzung einer Kreisfahrt gibt es zwei Möglichkeiten:
 
 \begin{enumerate}
-
 \item \emph{Explizit, iterativ:} \\
 Dem Roboter wird in einem festgelegten Takt mit den neuen Sollgeschwindigkeiten für die Räder gespeist. Die Sollgeschwindigkeiten können zur Laufzeit berechnet werden oder aus einer Lookup-Tabelle stammen.
 
@@ -170,10 +172,8 @@ Die Soll-Radgeschwindigkeiten werden als Funktion abhängig von der Zeit seit Be
 Wegen dieser Vorteile wird die implizite Definition der Fahrbewegung implementiert.
 
 
-% =============================================================================
 \section{Schlussteil}
 \subsection{Diskussion der Ergebnisse}
-???
 
 \subsection{Schwierigkeiten}
 Bei der Umsetzung der Kreisfahren treten zahlreiche Schwierigkeiten auf, auf die über die Programmierung kein Einfluss zu nehmen ist.
