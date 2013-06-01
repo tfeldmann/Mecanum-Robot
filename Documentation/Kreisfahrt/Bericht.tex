@@ -177,6 +177,22 @@ Die Soll-Radgeschwindigkeiten werden als Funktion abhängig von der Zeit seit Be
 \end{enumerate}
 
 Wegen dieser Vorteile wird die implizite Definition der Fahrbewegung implementiert.
+Der dafür notwendige Faktor K wurde für den Bodenbelag in der Werkstatt empirisch ermittelt.
+
+Alle Fahrten werden über zwei Bezugsgrößen definiert: Die Winkelgeschwindigkeit $\omega(t)$ für die rotatorische- und die Richtungvektor $\underline{v}(t)$ für die translatorische Komponente der Fahrt. Das Bezugssystem sei hierbei das robotereigene Koordinatensystem.
+
+In den Bewegungsabläufen \emph{Kreisfahrt vorwärts} (Abbildung~\ref{fig:kreis-vorwaerts}) und \emph{Kreisfahrt seitwärts} (Abbildung~\ref{fig:kreis-seitwaerts}) gilt $\omega = const$ und $\underline{v} = const$. $\omega$ und $\underline{v}$ müssen daher nur einmal berechnet werden.
+
+Anders gestaltet sich die translatorische Kreisfahrt (Abbildung~\ref{fig:kreis-translatorisch}). Diese ist wie folgt definiert:
+\begin{align*}
+    \omega(t) &= 0 \\
+    \underline{v}(t) &= v_0
+        \begin{bmatrix}
+            \cos(t \cdot k_t) \\
+            \sin(t \cdot k_t)
+        \end{bmatrix}
+\end{align*}
+Der Roboter behält dabei seine Geschwindigkeit über die gesamte Kreisfahrt bei, da gilt $betrag(\underline{v}) = const$. Die Fahrt wird gestoppt, wenn gilt $v_x < 0$, also nach dem geforderten Viertelkreis.
 
 
 \section{Schlussteil}
