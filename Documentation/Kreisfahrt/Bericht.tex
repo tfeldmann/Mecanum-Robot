@@ -1,7 +1,3 @@
-% TODO
-%
-% - Fotos der Räder und Anordnung
-
 \documentclass[a4paper]{article}
 
 \usepackage[utf8]{inputenc}
@@ -16,55 +12,61 @@
 \usepackage{todonotes}
 
 \title{Kreisfahrten mit einem Roboter mit Mecanum-Rädern}
-\author{Manuel Fehmer \\ Thomas Feldmann \\ Marlene Feldmann \\ Carsten Hussmann}
+\author{Manuel Fehmer \\ Thomas Feldmann \\ Marlene Feldmann \\ Carsten Hußmann}
 
 \begin{document}
 \maketitle
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\textwidth]{Abbildungen/Roboter}
+    \caption{Der betrachtete Roboter mit montiertem Knickarm}
+\end{figure}
 \newpage
 
 \section{Einleitung}
-\begin{figure}
-    \centering
-    \includegraphics[width=.8\textwidth]{Roboter}
-    \caption{Der betrachtete Roboter mit montiertem Knickarm}
-\end{figure}
-Der Mecanum-Roboter ist ein omnidirektionales Fahrzeug. Er kann ohne Lenkung aus jeder Position in eine beliebige Richtung fahren. Grund dafür sind die verwendeten Allseitenräder -- Mecanum-Räder -- auf deren Umlauffläche 15 weitere tonnenförmige Hilfsräder angebracht sind. Zur Steuerung des Roboters ist es notwendig ein mathematisches Modell zur Beschreibung der einzelnen Bewegungen der Räder aufzustellen.
+Der Mecanum-Roboter ist ein omnidirektionales Fahrzeug. Er kann ohne Lenkung aus jeder Position in eine beliebige Richtung fahren. Grund dafür sind die verwendeten Allseitenräder -- Mecanum-Räder -- auf deren Umlauffläche 15 weitere tonnenförmige Hilfsräder angebracht sind. Zur Steuerung des Roboters ist es notwendig, ein mathematisches Modell zur Beschreibung der einzelnen Bewegungen der Räder aufzustellen.
 
-Ziel ist es eine Kreisfahrt auf einem Viertelkreis mit dem Durchmesser $4000~mm$ auf drei Arten zu realisieren.
+Ziel ist es, eine Kreisfahrt auf einem Viertelkreis mit dem Durchmesser $4000~mm$ auf drei Arten zu realisieren.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.6\textwidth]{Viertelkreis-vorwaerts}
+    \includegraphics[width=.6\textwidth]{Abbildungen/Viertelkreis-vorwaerts}
     \caption{Kreisfahrt vorwärts}
     \label{fig:kreis-vorwaerts}
 \end{figure}
-Der Mecanum-Roboter fährt einen normalen Viertelkreis. Das Koordinatensystem des Roboters dreht sich dabei während der Kreisfahrt mit.
+Der Mecanum-Roboter fährt einen normalen Viertelkreis. Das Koordinatensystem des Roboters dreht sich dabei während der Kreisfahrt mit, $y'$ ist Tangente an den gefahrenen Kreis.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.6\textwidth]{Viertelkreis-translatorisch}
+    \includegraphics[width=.6\textwidth]{Abbildungen/Viertelkreis-translatorisch}
     \caption{Translatorische Kreisfahrt}
     \label{fig:kreis-translatorisch}
 \end{figure}
-Die Koordinaten des Roboters liegen auf den Raumkoordinaten. Die parallele Ausrichtung bleibt während der Kreisfahrt bestehen.
+Das Koordinatensystem des Roboters ist stets parallel zu den Raumkoordinaten während der Robotermittelpunkt im Raum einen Kreis abfährt.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.6\textwidth]{Viertelkreis-seitwaerts}
+    \includegraphics[width=.6\textwidth]{Abbildungen/Viertelkreis-seitwaerts}
     \caption{Kreisfahrt seitlich}
     \label{fig:kreis-seitwaerts}
 \end{figure}
-Das Koordinatensystem des Roboters ist um $90^\circ$ zum Raumkoodinatensystem gedreht. Bei der Kreisfahrt dreht sich der Roboter seitlich mit.
+Das Koordinatensystem des Roboters gegenüber Abbildung~\ref{fig:kreis-vorwaerts} um $90^\circ$ gedreht. $x'$ ist Tangente an den gefahrenen Kreis.
 
 
 \section{Mathematik zur Kinematik / Dynamik}
-Dieses Kapitel beschreibt die Mathematik hinter der Kinematik und Dynamik -- Bewegung unter Einwirkung von Kräften -- des Mecanum-Roboters. Jede Bewegung setzt sich aus einer translatorischen und einer rotatorischen Bewegung zusammen. So ist das auch das Kapitel gegliedert.
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\textwidth]{Abbildungen/Koordinaten}
+    \caption{Bezugskoordinaten}
+\end{figure}
+Dieses Kapitel beschreibt die Mathematik hinter der Kinematik und Dynamik des Mecanum-Roboters.
+Jede Bewegung setzt sich aus einer translatorischen und einer rotatorischen Bewegung zusammen.
 
 \subsection{Translation}
 Vereinfacht kann die translatorische Bewegung des Mecanum-Roboters durch die Drehrichtung und Drehgeschwindigkeit der Mecanum-Räder beschrieben werden. Abhängig von den unterschiedlichen Kombination fährt der Roboter entlang des Vektors für die Gesamtbewegung.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.6\textwidth]{Kraefte-am-Rad}
+    \includegraphics[width=.6\textwidth]{Abbildungen/Kraefte-am-Rad}
     \caption{Kräftegleichgewicht an einem Mecanum-Rad.}
 \end{figure}
 
@@ -204,7 +206,7 @@ Schnell hat sich herausgestellt, dass nur mit Kenntnis der Radgeschwindigkeiten 
     \item Das treibende Rad des Riementriebs löst sich nach längerem Gebrauch von der Welle und muss mit gezielten Hammerschlägen wieder an seine Position gebracht werden.
 \end{itemize}
 
-Nichtsdestotrotz wird mit dem behandelten Modell und dessen Implementierung bei einem Kreisdurchmesser von $4000 mm$ eine Reproduzierbarkeit auf wenige Zentimeter ($\pm 30 mm$) erreicht.
+Dennoch wird mit dem behandelten Modell und dessen Implementierung bei einem Kreisdurchmesser von $4000 mm$ eine Reproduzierbarkeit auf wenige Zentimeter ($\pm 30 mm$) erreicht.
 Dieser Fehler resultiert hauptsächlich aus der Unebenheit des Hallenbodens.
 
 
