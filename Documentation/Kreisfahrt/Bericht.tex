@@ -1,7 +1,6 @@
 % TODO
 %
 % - Fotos der Räder und Anordnung
-% - Diskussion der Ergebnisse
 
 \documentclass[a4paper]{article}
 
@@ -197,19 +196,16 @@ Der Roboter behält dabei seine Geschwindigkeit über die gesamte Kreisfahrt bei
 
 
 \section{Schlussteil}
-\subsection{Diskussion der Ergebnisse}
-\todo[caption={Koordinatentransformation in Ergebnisdiskussion}]{berechnung der Koordinatentransformation irrelevant für die Roboterposition, zu ungenau, optisches messsystem(Camera in der Halle)}
-\subsection{Schwierigkeiten}
-Bei der Umsetzung der Kreisfahren treten zahlreiche Schwierigkeiten auf, auf die über die Programmierung kein Einfluss zu nehmen ist.
-\begin{compactitem}
-    \item Untergrund uneben / Unebenheiten
-    \item keine perfekt planaren Fläche
-    \item Schmutz ändert Reibkoeffizient
-    \item Motorenleistung zu schwach, verlieren Schritte
-    \item Räder verhaken im Riementrieb
-    \item Lagerung der Rollen auf den Rädern mangelhaft
-    \item Befestigung und Lagerung der Rollen mangelhaft
-\end{compactitem}
-\newpage
-\listoftodos
+Schnell hat sich herausgestellt, dass nur mit Kenntnis der Radgeschwindigkeiten keine genaue Positionierung möglich ist. Selbst kleinste Unebenheiten oder Verschmutzungen resultieren in starken Fahrbahnabweichungen. Für den produktiven Betrieb sind daher externe Positionsreferenzen notwendig, wie zum Beispiel eine Deckenkamera. Hinzu kommen einige mechanische Schwierigkeiten:
+
+\begin{itemize}
+    \item Die Motoren sind zu schwach dimensioniert und verlieren bei abrupten Manövern Schritte.
+    \item Die Mecanum-Räder liegen zu nah am Riementrieb und verhaken sich regelmäßig mit den überstehenden Schrauben im Riemen.
+    \item Das treibende Rad des Riementriebs löst sich nach längerem Gebrauch von der Welle und muss mit gezielten Hammerschlägen wieder an seine Position gebracht werden.
+\end{itemize}
+
+Nichtsdestotrotz wird mit dem behandelten Modell und dessen Implementierung bei einem Kreisdurchmesser von $4000 mm$ eine Reproduzierbarkeit auf wenige Zentimeter ($\pm 30 mm$) erreicht.
+Dieser Fehler resultiert hauptsächlich aus der Unebenheit des Hallenbodens.
+
+
 \end{document}
