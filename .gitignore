@@ -4,3 +4,8 @@
 *.java
 sketch.properties
 Firmware/tests
+*.fdb_latexmk
+*.aux
+*.log
+Kreisfahrt.pdf
+*.gz
