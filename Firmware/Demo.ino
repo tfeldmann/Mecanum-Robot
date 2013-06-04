@@ -13,7 +13,7 @@ CurveResult circle_translation_only(float t)
     result.vx = -cos(t * timeStretch);
     result.vy = sin(t * timeStretch);
 
-    stop after a quarter circle
+    // stop after a quarter circle
     if (result.vy < 0)
     {
         result.finished = true;
@@ -32,7 +32,11 @@ CurveResult circle_with_rotation_forward(float t)
     result.vx = 0;
     result.vy = 1;
 
-    // todo: t>160000 stop
+    // stop after a quarter circle
+    if (t > 16.0)
+    {
+        result.finished = true;
+    }
 
     return result;
 }
@@ -47,7 +51,11 @@ CurveResult circle_with_rotation_sideways(float t)
     result.vx = -1;
     result.vy = 0;
 
-    // todo: time>16
+    // stop after a quarter circle
+    if (t > 16.0)
+    {
+        result.finished = true;
+    }
 
     return result;
 }
