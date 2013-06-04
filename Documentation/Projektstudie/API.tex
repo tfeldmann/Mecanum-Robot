@@ -22,6 +22,25 @@ Anschließend befinden sich die Schrittmotor-Treiberkarten im Ruhezustand und m�
 Anstelle von \lstinline{v1, v2, v3} und \lstinline{v4} sind durch Leerzeichen getrennte, ASCII-codierte Integer im Bereich von $-25000$ bis $25000$ (Schritte pro Sekunde) anzugeben.
 \end{description}
 
-\subsection{Fehlercodes}
 
-\subsection{Events}
+\subsection{Fehlercodes}
+Tritt bei der Kommunikation mit der API ein Fehler auf, führt der Roboter sofort einen Not-Stopp aus und antwortet mit einem Fehlercode sowie einer Fehlerbeschreibung.
+Damit ist auch bei einer Störung der Kommunikation gewährleistet, dass der Roboter nicht außer Kontrolle gerät.
+Mögliche Fehlercodes sind beispielsweise:
+
+\lstinline{!E01: Not enough arguments supplied.}\\
+\lstinline{!E02: Unknown command: [command]}\\
+
+
+\subsection{Ereignisse}
+Um externer Software Rückschlüsse auf den Zustand des Roboters zu ermöglichen, sendet dieser bei erfolgreichen Initialisierungen oder Befehlen Ereignisprotokolle.
+
+Fest definierte, für die steuernde Software relevante Aktivitäten werden mit vorangestelltem Index gesendet:\\
+\lstinline{@A01: All motors are ready.}\\
+\lstinline{@A02: New motor speed set.}\\
+\lstinline{@A03: QuickStop successful.}
+
+Sonstige Logging-Nachrichten werden mit einer Raute versehen.
+Dazu zählen aktuelle Soll-/Ist-Werte und Informationen über die Firmware, wie beispielsweise\\
+\lstinline{# Left: 120, Right: 230}\\
+\lstinline{# Firmware Version 1.0, compiled on Tue Jun  4 18:15:59 2013}
