@@ -22,9 +22,9 @@ void api_begin()
     serialCommand.addCommand("@start", api_start);
     serialCommand.addCommand("@stop", api_stop);
     serialCommand.addCommand("@v", api_v);
-    serialCommand.addCommand("@demo1", demo_1);
-    serialCommand.addCommand("@demo2", demo_2);
-    serialCommand.addCommand("@demo3", demo_3);
+    serialCommand.addCommand("@demo_translation", demo_translation);
+    serialCommand.addCommand("@demo_forward", demo_forward);
+    serialCommand.addCommand("@demo_sideways", demo_sideways);
     serialCommand.setDefaultHandler(api_unknown);
 }
 

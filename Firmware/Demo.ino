@@ -14,7 +14,7 @@ CurveResult circle_translation_only(float t)
     result.vy = sin(t * timeStretch);
 
     // stop after a quarter circle
-    if (result.vy < 0)
+    if (result.vx > 0)
     {
         result.finished = true;
     }
@@ -103,19 +103,19 @@ void demo_stop()
     robot_quickStop();
 }
 
-void demo_1()
+void demo_translation()
 {
     demo = &circle_translation_only;
     demo_start();
 }
 
-void demo_2()
+void demo_forward()
 {
     demo = &circle_with_rotation_forward;
     demo_start();
 }
 
-void demo_3()
+void demo_sideways()
 {
     demo = &circle_with_rotation_sideways;
     demo_start();
