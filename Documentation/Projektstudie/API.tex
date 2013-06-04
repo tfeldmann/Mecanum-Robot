@@ -5,9 +5,23 @@
 Die Kommunikation mit dem Roboter findet über die UART-Schnittstelle bei einer Baudrate von 115200 Mbaud statt.
 Auf dem Arduino sorgt die Library \emph{SerialCommand}\footnote{https://github.com/kroimon/Arduino-SerialCommand} für die Interpretation der Ergebnisse.
 
+\subsection{Befehle}
+Folgende Befehle sind verfügbar:
 \begin{description}
-
 \item \lstinline{@start} \\
-Test
+Initialisiert und startet die Schrittmotor-Treiberkarten gemäß Kapitel~\ref{sec:Treiber}.
+Der Roboter ist daraufhin fahrbereit.
 
+\item \lstinline{@stop} \\
+Führt einen Not-Stopp durch. Dabei wird der in Kapitel~\ref{sec:Treiber} beschriebene Quickstop ausgeführt.
+Anschließend befinden sich die Schrittmotor-Treiberkarten im Ruhezustand und müssen erst wieder mit dem Befehl \lstinline{@start} gestartet werden.
+
+\item \lstinline{@v v1 v2 v3 v4} \\
+Über diesen Befehl werden die Soll-Radgeschwindigkeiten vorgegeben.
+
+Anstelle von \lstinline{v1, v2, v3} und \lstinline{v4} sind durch Leerzeichen getrennte, ASCII-codierte Integer im Bereich von $-25000$ bis $25000$ (Schritte pro Sekunde) anzugeben.
 \end{description}
+
+\subsection{Fehlercodes}
+
+\subsection{Events}
