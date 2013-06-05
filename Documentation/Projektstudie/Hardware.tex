@@ -1,18 +1,21 @@
 % !TEX root = Projektstudie.tex
 % Hardware
 
-\section{Hardware}
-\label{sec:Hardware}
+\section{Hardwaremodifikation}
+\label{sec:Hardwaremodifikation}
 
-Kapitel \ref{sec:Hardware} beschreibt die vorhandenen Hardware. Gegliedert ist es in die Teilaspekte Mecanum-Roboter, Meacum-Räder, notwendige Hardwareänderungen und Elektronik.
-\subsection{Mecanum-Roboter}
-\label{sec:Mecanum-Roboter}
-
-
-
-\subsection{Notwendige Hardwareänderung}
 Um eine sichere Steuerung zu gewährleisten ist es notwendig die Hardware zu optimieren.
-Die Netzanschlussleitung der vier Netzteile wird komplett erneuert. Der Schutzleiter wird angeschlossen wobei auf eine korrekte Anwendung der Zugentlastungen geachtet wird. Die Erdung des Schutzleiters wird über Erdungsklemmen auf das Fahrzeuggehäuse gelegt.
-Vor der Hardwareänderung sind je zwei Motortreiberkarten über einen separaten CAN-Bus von der ver-bauten SPS angesprochen worden. Um einen Betrieb sowohl über den Arduino als auch über die SPS zu ermöglichen werden alle Komponenten auf einen CAN-Bus zusammengelegt, die Motortreiberkarten umadressiert und die 120 Ohm Abschlusswiderstände in den äußersten Steckern eingelötet.
-Da die Steckerbelegung des Arduino-CAN-Shield von der ISO 11 898 Norm abweicht, wurde der entsprechende Stecker der Busleitung angepasst. Ein weiterer Stecker zur Diagnose der CAN-Bus-Signale via PC wird angelötet.
-Die verwendete Schraubenlänge zur Befestigung der Mecanum-Räder war ungenügend. Alle vier Mecanum - Räder sind nun mit je drei M5 Schrauben befestigt.
+\begin{itemize}
+\item{Die Netzanschlussleitung der vier Netzteile wird komplett erneuert. Der Schutzleiter wird angeschlossen wobei auf eine korrekte Anwendung der Zugentlastungen geachtet wird.}
+\item{Die Erdung des Schutzleiters wird über Erdungsklemmen auf das Fahrzeuggehäuse gelegt.}
+
+\item{Die verwendete Schraubenlänge zur Befestigung der Mecanum-Räder war ungenügend. Alle vier Mecanum - Räder sind nun mit je drei M5 Schrauben befestigt.}
+\end{itemize}
+
+Vor der Hardwareänderung sind je zwei Motortreiberkarten über einen separaten CAN-Bus von der verbauten SPS angesprochen worden. 
+\begin{itemize}
+\item{Um einen Betrieb sowohl über den Arduino als auch über die SPS zu ermöglichen werden alle Komponenten auf einen CAN-Bus zusammengelegt, die Motortreiberkarten umadressiert und die 120 Ohm Abschlusswiderstände in den äußersten Steckern eingelötet.}
+\item{Da die Steckerbelegung des Arduino-CAN-Shield von der ISO 11 898 Norm abweicht, wurde der entsprechende Stecker der Busleitung angepasst.}
+\item{Ein weiterer Stecker zur Diagnose der CAN-Bus-Signale via PC wird angelötet.}
+
+\end{itemize}
