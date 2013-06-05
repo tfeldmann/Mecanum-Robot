@@ -3,11 +3,19 @@
 
 \section{Einleitung}
 
-Der Mecanum-Roboter ist ein omnidirektionales Fahrzeug. Er kann jederzeit aus jeder Position in eine beliebige Richtung fahren. Grund dafür sind die verwendeten Allseitenräder - Mecanum-Räder - auf deren Umlauffläche 15 weitere tonnenförmige Hilfsräder angebracht sind. Zur Steuerung des Roboters ist es notwendig ein mathematisches Modell zur Beschreibung der einzelnen Bewegungen der Räder aufzustellen. Ziel ist es eine Kreisfahrt zu programmieren. 
+Der Mecanum-Roboter ist ein omnidirektionales Fahrzeug. Er kann aus jeder Position in jede beliebige Richtung fahren. Grund dafür sind die verwendeten Allseitenräder - Mecanum-Räder. 
 
-Bisher werden die Schrittmotoren der Räder mit Hilfe von Nanotec-Treiberkarten und dem CANopen Protokoll angesteuert. Das CANopen Protokoll nutzt als Übertragungsmedium den CAN-Bus.  Die Kommunikation läuft über eine SPS. Diese soll aus Kostengründen durch einen Arduino mit einem CAN-Shield ersetzt werden. Der Austausch soll zudem die Programmierung der Bewegung des Mecanum-Roboters erleichtern.
+Zur Steuerung des Roboters ist es notwendig ein mathematisches Modell zur Beschreibung der einzelnen Bewegungen der Räder aufzustellen. Abhänging von der Drehrichtung und der Geschwindigkeit der Räder bewegt sich der Roboter.
 
-Zusammengefasst ist es das Ziel der Projektstudie den Austausch zu realisieren, die Bewegung des Roboters über den Arduino zu programmieren und den Roboter über einen Joystick zu steuern. Die omnidirektionale Kinematik soll zudem durch einen Simulator verdeutlicht werden. Die Programmierung dessen soll ebenfalls umgesetzt werden.
+Bisher werden die Schrittmotoren der Räder mit Hilfe von Nanotec-Treiberkarten und dem CANopen Protokoll angesteuert. Das CANopen Protokoll nutzt als Übertragungsmedium den CAN-Bus. Die Kommunikation läuft über eine SPS. Um die Peripherie zu vereinfachen soll diese durch einen Arduino mit einem CAN-Shield ersetzt werden. Der Austausch soll zudem die Programmierung der Bewegung des Mecanum-Roboters erleichtern.
+
+Ziel der Projektstudie ist es den Austausch durch Entwicklung der notwendigen Treiber zu realisieren, die Bewegung des Roboters über den Arduino zu programmieren und den Roboter über einen Joystick zu steuern. Die omnidirektionale Kinematik soll zudem durch einen Simulator am PC verdeutlicht werden. Ergänzend steht ein weitreichender Ausblick mit ausgearbeiteten Ideen zu einer Platine zur Erweiterung um Sensoren zur Umfelderfassung. 
+
+\subsection*{Vorgehensweise}
+
+In Kapitel eins wird der vorhandene Mecanum-Roboter und die Mecanum-Räder beschrieben. Eine Darstellung der vorgenommenen Hardwaremodifikation erfolgt in Kapitel 2. 
+Die Mathematische Modellierung zur Beschreibung der Kinematik und die Treiberentwicklung sind Themen der nächsten zwei Kapitel. Kapitel 5 beschreibt die komplette API inklusive aller Befehle, Fehlercodes und Ereignisse. Die manuelle Steuerung und Simulation werden in Kapitel 6 beschrieben.
+Kapitel 7 und 8 bilden den Schlussteil. Nach dem Fazit folgt ein umfassender Ausblick auf mögliche zukünftige Projekte.
 
 
 \begin{figure}[H]
@@ -17,12 +25,14 @@ Zusammengefasst ist es das Ziel der Projektstudie den Austausch zu realisieren, 
 \label{fig:Roboter}
 \end{figure}
 
+\section {Mecanum-Roboter}
+\label{sec:Mecanum-Roboter}
 
 Der Mecanum-Roboter ist 1000 mm lang. Er ist mit vier Mecanum-Rädern, die im Rechteck angeordnet sind, ausgestattet. Der Radstand beträgt 775 mm und die Spurbreite beträgt 490 mm. Die Räder haben einen Durchmesser von 115 mm und besitzen jeweils 15 Hilfsrollen. Eine detaillierte Beschreibung folgt im Kapitel \ref{sec:Mecanum-Räder}.
 
 Die Anordnung der Mecanum-Räder und deren Technologie ermöglichen dem Mecanum-Roboter eine omnidirektionale Bewegung. Er kann sich ohne mechanische Lenkung aus jeder Position in jede Richtung fortbewegen.
 
-\subsection{Mecanum-Räder}
+\subsection*{Mecanum-Räder}
 \label{sec:Mecanum-Räder}
 Das Mecanum Rad wurde 1973 von der schwedischen Firma Mecanum AB entwickelt und bedient unter-schiedliche Anwendungen. Heutige Anwendungsbeispiele sind unter anderem Förderfahrzeuge, fahrerlose Transportfahrzeuge oder Mobilitätshilfe. Auch in der Robotik finden die Allseitenräder immer häufiger Verwendung.
 \begin{figure}[H]
