@@ -46,7 +46,7 @@ Fest definierte, für die steuernde Software relevante Aktivitäten werden mit v
 Sonstige Logging-Nachrichten werden mit einer Raute versehen.
 Dazu zählen aktuelle Soll-/Ist-Werte und Informationen über die Firmware, wie beispielsweise\\
 \lstinline{# Debug mode activated}\\
-\lstinline{# Firmware Version 1.0, compiled on Tue Jun  4 18:15:59 2013}
+\lstinline{# Firmware Version 1.0, compiled on Tue Jun 4 18:15:59 2013}
 
 
 \subsection{C-API}
@@ -57,7 +57,10 @@ Für die Steuerung des Roboters aus der Firmware heraus werden verschiedene C-Fu
 Initialisiert die Kommunikation mit dem Roboter. Der CAN-BUS Übertragungsrate wird auf 1Mbaud festgelegt. Diese Funktion wird üblicherweise einmal in der \lstinline{setup()}-Routine des Arduinos ausgeführt.
 
 \item \lstinline{void robot_startMotors()} \\
-
+Startet alle vier Motoren des Roboters.
+Die Schrittmotor-Treiberkarten werden dabei wie in Kapitel~\ref{sec:Treiber} beschrieben auf die richtigen Beschleunigungswerte und den \emph{Velocity-Mode} eingestellt.
+Durch die vollständige Initialisierung der Treiberkarten in diesem Schritt ist gewährleistet, dass bei einem Austausch keine manuellen Einstellungen vorgenommen werden müssen.
+Nach dem Ausführen dieser Funktion ist der Roboter fahrbereit.
 
 \item \lstinline{void robot_setMotorSpeed(int16_t speed[4])} \\
 \item \lstinline{void robot_setSingleMotorSpeed(uint8_t wheel, int16_t speed)} \\
