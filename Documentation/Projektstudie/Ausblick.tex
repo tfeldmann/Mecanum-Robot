@@ -3,11 +3,6 @@
 
 \section{Ausblick}
 \label{sec:Ausblick}
-% - NOT-AUS Schalter
-% - Arduino-Shield
-% - Deckenkamera
-% - Hindernissen ausweichen (Dijkstra?)
-% - Steuerung übers Netzwerk / W-Lan: Python Flask Server + Raspberry
 
 \subsection{Schutzbeschaltung}
 \label{sec:Schutzbeschaltung}
@@ -19,8 +14,24 @@ Um einen sicheren Betrieb des Roboters sicher zu stellen, muss ein NOT-AUS-Schal
 \end{itemize}
 In beiden Fällen muss der NOT-AUS-Schalter die vorhandenen Ströme sicher abschalten können. Des Weiteren sollten Sicherungsautomaten nachgerüstet werden. 
 
+\subsection{Neukonstruktion}
+\label{sec:Neukonstruktion}
+Um die im Fazit Kapitel \ref{sec:Fazit} beschriebenen Probleme zu beheben, empfiehlt sich eine Neukonstruktion des Mecanum-Roboters.
+\begin{itemize}
+\item{Um permanenten Bodenkontakt mit allen vier Rädern,welcher essentiell für die Funktionsweise der Mecanum-Räder ist, zu gewährleisten sollte eine Einzelradaufhängung oder eine Pendelachse vorgesehen werden.}
+\item{Da die Motortreiberkarten mit $48V$ bereits an der oberen Leistungsgrenze betrieben werden, könnte man die mangelnde Motorleistung durch Reduktion der Gesamtmasse ausgleichen. Dies könnte man durch diverse Maßnahmen realisieren:
+\begin {itemize}
+\item{Konstruktion des Chassis aus einem leichtern Werkstoff wie z.\,B.\ Aluminium.}
+\item{Durch einen $48V$-Akku können DC-AC-Konverter und die vier Netzteile eingespart werden.}
+\end{itemize}
+}
+\item{Axiale Sicherung der Riemenscheiben auf den Motorwellen und Kürzung der überstehenden Schraubenenden an den tonnenförmigen Umfangsrollen der Mecanum-Räder.}
+\item{Zur besseren Navigation sollte der Schwerpunkt im Mittelpunkt des Roboters liegen und der Radstand gleich der Spurbreite sein.}
+\end{itemize}
+
 \subsection{Arduino-Shield}
 \label{sec:Arduino-Shield}
+% - Arduino-Shield
 Da der Speicher des verwendeten Arduino UNO bereits zu $78\%$ ausgelastet ist, wird in Ergänzung zum Sparkfun CAN-Shield ein eigenes CAN-Shield für den leistungsfähigeren Arduino MEGA 2560 entwickelt.
  
 Durch geschickte Wahl der Anschlusspins wird die optional angedachte Verwendung des Arduino-Ethernet-Shield ermöglicht. Hierzu werden der Ethernet-Shield und der entwickelte CAN-Bus-Shield auf den Arduino gestapelt aufgesteckt. Neben CAN-Bus-Stecker und –Buchse mit erforderlicher Elektronikbeschaltung besitzt das Layout Anschlussklemmen für $5V$ Spannungsversorgung und $I^{2}C$-Bus.
@@ -51,9 +62,12 @@ sind die Abmessungen der Bauteile  in Grau, Lötpads in Grün, die Top Kupferfl�
 
 \subsection{Deckenkamera}
 \label{sec:Deckenkamera}
+% - Deckenkamera
 
 \subsection{Hindernisse umfahren}
 \label{sec:Hindernisse}
+% - Hindernissen ausweichen (Dijkstra?)
 
 \subsection{Steuerung via Netzwerk}
 \label{sec:Netzwerk}
+% - Steuerung übers Netzwerk / W-Lan: Python Flask Server + Raspberry
