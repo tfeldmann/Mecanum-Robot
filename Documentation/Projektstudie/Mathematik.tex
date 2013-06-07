@@ -77,7 +77,7 @@ Für eine Drehung im Uhrzeigersinn drehen beispielsweise Rad 1 und 2 rückwärts
 \subsection{Versuchsreihe: Bestimmung $K_i$}
 \label{sec:versuche-k-faktor}
 
-Der Faktor $K_i$ hat einen großen Einfluss auf die Bewegung des Mecanum-Roboters. Er setzt sich aus unterschiedlichen Einzelfaktoren zusammen, welche die durch das Motormoment erzeugten treibenden Kräfte beeinflussen. Zu den Einflussfaktoren zählen unter anderem die verschiedenen Reibungsfaktoren und die Flächenträgheitsmomente. Da eine Bestimmung der einzelnen Faktoren sehr aufwendig wäre und die Varianzen der Fehleranteile  bei der Multiplikation zu $K_i$ ebenfalls multipliziert werden müssen, wird $K_i$ direkt empirisch ermittelt. 
+Der Faktor $K_i$ hat einen großen Einfluss auf die Bewegung des Mecanum-Roboters. Er setzt sich aus unterschiedlichen Einzelfaktoren zusammen, welche die durch das Motormoment erzeugten treibenden Kräfte beeinflussen. Zu den Einflussfaktoren zählen unter anderem die verschiedenen Reibungsfaktoren und die Flächenträgheitsmomente. Da eine Bestimmung der einzelnen Faktoren sehr aufwendig wäre und die Varianzen der Fehleranteile  bei der Multiplikation zu $K_i$ ebenfalls multipliziert werden müssen, wird $K_i$ direkt ermittelt. 
 
 Bei diversen Probefahrten wird ein sehr großer Einfluss des Untergrunds festgestellt. Die Bestimmung für  $K_i$  erfolgt daher explizit für den Boden in der Werkstatt. Um den Einfluss von Staub und anderen äußeren Faktoren gering zu halten, wird die Versuchsreihe unter folgenden definierten Bedingungen durchgeführt:
 
@@ -87,9 +87,27 @@ Bei diversen Probefahrten wird ein sehr großer Einfluss des Untergrunds festges
 \item ölfrei
 \end {itemize}
 
-Unebenheiten, welche aufgrund der Funktionsweise der Mecanum-Räder einen ebenfalls einen großen Einfluss haben, können aus Praktikabilitätsgründen nicht berücksichtigt werden. Für die Versuchsreihe wird daher eine möglichst ebene Versuchsstrecke ausgewählt. Je länger die Strecke ist, desto größer ist die Gefahr von Unebenheiten. Bei einer sehr kurzen Strecke und entsprechend kurzen Messzeiten ist die Reproduzierbarkeit nicht gewährleistet. 
+Unebenheiten, welche aufgrund der Funktionsweise der Mecanum-Räder einen ebenfalls einen großen Einfluss haben, können aus Praktikabilitätsgründen nicht berücksichtigt werden.Zudem wird eine Richtungsabhängigkeit des Faktors vermutet. Dieser wird an dieser Stelle aber nicht weiter untersucht. Abbildung \ref{fig:himmel} zeigt die Ortierung des Roboters. Für die Richtungen N und S wird $K_i$ im Folgenden bestimmt. 
 
-Als günstiger Kompromiss wird eine fünf Meter lange Versuchsstrecke auf dem Flur ausgewählt. Um zusätzlich eine mögliche  Richtungsabhängigkeit des Faktors zu untersuchen werden acht Fahrrichtungen untersucht. Die Fahrzeit wird jeweils von zwei Stoppuhren erfasst. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{Abbildungen/Himmelsrichtungen}
+    \caption{Orientierung des Roboters}
+    \label{fig:himmel}
+\end{figure}
+
+Für die Versuchsreihe wird eine möglichst ebene Versuchsstrecke ausgewählt. Je länger die Strecke ist, desto größer ist die Gefahr von Unebenheiten. Bei einer sehr kurzen Strecke und entsprechend kurzen Messzeiten ist die Reproduzierbarkeit nicht gewährleistet. Es ist ein geeigneter Kompromiss zu wählen. 
+Im Programm besteht die Möglichkeit den Motoren eine Anzahl von Schritten und damit eine Laufzeit vorzugeben. Das Messen der Zeit, welches aufgrund der Reaktionszeit beim Stoppen der Zeit als Fehlerquelle identifiziert wird, entfällt somit ebenfalls. 
+
+Für die Bestimmung des Faktors $K_i$ wird eine Laufzeit von 10~s und 10000~Schritten~pro~s vorgegeben. Um Wiederholbarkeit und Reproduzierbarkeit des Messsystems zu gewährleisten, wird  die zurückgelegte Strecke in drei Durchläufen von zwei Personen unanhängig voneinader gemessen. Aus der Untersetzung des Motors und dem Umfang der Räder wird die Sollstrecke bzw. Sollgeschwindigkeit berechnet. Um $K_i$ zu bestimmen wird diese im Verhältnis zur gefahrenen Strecke betrachtet.
+
+
+
+
+
+% Versuchsreihe_01 --> Excel
+
+
 
 
 
