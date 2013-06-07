@@ -60,6 +60,22 @@ CurveResult circle_with_rotation_sideways(float t)
     return result;
 }
 
+CurveResult stop_with_delay(float t)
+{
+    CurveResult result;
+    result.finished = false;
+    result.omega = 0;
+    result.vx = 1;
+    result.vy = 0;
+
+    if (t > 10.0)
+    {
+        result.finished = true;
+    }
+
+    return result;
+}
+
 
 // ============================================================================
 // Demo execution code
@@ -118,6 +134,12 @@ void demo_forward()
 void demo_sideways()
 {
     demo = &circle_with_rotation_sideways;
+    demo_start();
+}
+
+void demo_stopWithDelay()
+{
+    demo = &stop_with_delay;
     demo_start();
 }
 
