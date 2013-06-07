@@ -25,6 +25,7 @@ void api_begin()
     serialCommand.addCommand("@demo_translation", demo_translation);
     serialCommand.addCommand("@demo_forward", demo_forward);
     serialCommand.addCommand("@demo_sideways", demo_sideways);
+    serialCommand.addCommand("@demo_stopWithDelay", demo_stopWithDelay);
     serialCommand.setDefaultHandler(api_unknown);
 }
 
