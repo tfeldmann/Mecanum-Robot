@@ -65,8 +65,8 @@ CurveResult stop_with_delay(float t)
     CurveResult result;
     result.finished = false;
     result.omega = 0;
-    result.vx = 1;
-    result.vy = 0;
+    result.vx = 0;
+    result.vy = 1;
 
     if (t > 10.0)
     {
