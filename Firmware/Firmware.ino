@@ -15,6 +15,7 @@
 //     of this sketch. Copy them to your Arduino library folder.
 //
 
+#define VERSION "1.1"
 #include "types.h"
 
 void setup()

@@ -15,6 +15,9 @@ void api_unknown(const char *command)
 {
     Serial.print("!E02: Unknown command: ");
     Serial.println(command);
+
+    // stop robot for safety
+    api_stop();
 }
 
 void api_begin()
@@ -26,6 +29,7 @@ void api_begin()
     serialCommand.addCommand("@demo_forward", demo_forward);
     serialCommand.addCommand("@demo_sideways", demo_sideways);
     serialCommand.addCommand("@demo_stopWithDelay", demo_stopWithDelay);
+    serialCommand.addCommand("@about", api_about);
     serialCommand.setDefaultHandler(api_unknown);
 }
 
@@ -35,7 +39,6 @@ void api_begin()
 
 /**
  * Start the engines
- *
  * Usage: "@start"
  */
 void api_start()
@@ -45,7 +48,6 @@ void api_start()
 
 /**
  * Perform a quick stop
- *
  * Usage: "@stop"
  */
 void api_stop()
@@ -75,4 +77,12 @@ void api_v()
         v[wheel] = atoi(value);
     }
     robot_setMotorSpeed(v);
+}
+
+void api_about()
+{
+    Serial.print("#Firmware Version: ");
+    Serial.println(VERSION);
+    Serial.print("#Compiled on: ");
+    Serial.println(__TIMESTAMP__);
 }
