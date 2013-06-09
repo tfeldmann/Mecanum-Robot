@@ -16,13 +16,21 @@ Der Roboter ist daraufhin fahrbereit.
 Führt einen Not-Stopp durch. Dabei wird der in Kapitel~\ref{sec:Treiber} beschriebene Quickstop ausgeführt.
 Anschließend befinden sich die Schrittmotor-Treiberkarten im Ruhezustand und müssen erst wieder mit dem Befehl \lstinline{@start} gestartet werden.
 
-\item \lstinline{@v v1 v2 v3 v4} \\
+\item \lstinline{@v v1 v2 v3 v4}\\
 Über diesen Befehl werden die Soll-Radgeschwindigkeiten vorgegeben.
 
 Für \lstinline{v1}, \lstinline{v2}, \lstinline{v3} und \lstinline{v4} sind durch Leerzeichen getrennte, ASCII-codierte Integer im Bereich von $-25000$ bis $25000$ (Schritte pro Sekunde) anzugeben.
 
+\item Demoprogramme\\
+    \lstinline{@demo_translation}\\
+    \lstinline{@demo_forward}\\
+    \lstinline{@demo_sideways}\\
+    \lstinline{@demo_stopWithDelay}\\
+Diese Beispielprogramme für Demonstrationszwecke lassen den Roboter Viertelkreise auf verschiedene Arten (translatorisch, vorwärts, seitwärts) ausführen.\\
+\lstinline{@demo_stopWithDelay} lässt den Roboter exakt 10 Sekunden mit definierter Geschwindigkeit geradeaus fahren und wird für die Ermittlung des Faktors $K$ genutzt.
+
 \item \lstinline{@about} \\
-Zeigt Informationen über die Version und Kompilierungszeitpunkt der Firmware sowie die Namen der Autoren.
+Zeigt Informationen über die Version und Kompilierungszeitpunkt der Firmware.
 \end{description}
 
 
@@ -59,10 +67,16 @@ Initialisiert die Kommunikation mit dem Roboter. Der CAN-BUS Übertragungsrate w
 \item \lstinline{void robot_startMotors()} \\
 Startet alle vier Motoren des Roboters.
 Die Schrittmotor-Treiberkarten werden dabei wie in Kapitel~\ref{sec:Treiber} beschrieben auf die richtigen Beschleunigungswerte und den \emph{Velocity-Mode} eingestellt.
-Durch die vollständige Initialisierung der Treiberkarten in diesem Schritt ist gewährleistet, dass bei einem Austausch keine manuellen Einstellungen vorgenommen werden müssen.
+Durch die vollständige Initialisierung der Treiberkarten in diesem Schritt ist gewährleistet, dass nach einem Austausch einer Treiberkarte keine manuellen Einstellungen vorgenommen werden müssen.
 Nach dem Ausführen dieser Funktion ist der Roboter fahrbereit.
 
 \item \lstinline{void robot_setMotorSpeed(int16_t speed[4])} \\
-\item \lstinline{void robot_setSingleMotorSpeed(uint8_t wheel, int16_t speed)} \\
+Dieser Befehl dient zum Setzen der Geschwindigkeiten aller vier Motoren.
+Die Geschwindigkeiten werden als \lstinline{array} von Integern übergeben.
+Die maximale Geschwindigkeit eines Motors ist auf 25000 Schritte pro Sekunde festgelegt, dementsprechend müssen Werte zwischen -25000 und 25000 angegeben werden.
+Da die Motoren auf den gegenüberliegenden Seiten des Roboters gegensinnig angebracht sind, findet in der Software noch eine Umrechnung statt, so dass der Roboter vorwärts fährt, wenn alle Geschwindigkeiten positiv angegeben werden.
+
 \item \lstinline{void robot_quickStop()} \\
+Führt einen Not-Stopp durch. Dabei wird der in Kapitel~\ref{sec:Treiber} beschriebene Quickstop ausgeführt.
+Anschließend befinden sich die Schrittmotor-Treiberkarten im Ruhezustand und müssen erst wieder mit dem Befehl \lstinline{robot_startMotors()} gestartet werden.
 \end{description}
