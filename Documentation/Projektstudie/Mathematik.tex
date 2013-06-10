@@ -86,7 +86,7 @@ Für eine Drehung im Uhrzeigersinn drehen beispielsweise Rad 1 und 2 rückwärts
 Der Faktor $K_i$ hat einen großen Einfluss auf die Bewegung des Mecanum-Roboters. Er setzt sich aus unterschiedlichen Einzelfaktoren zusammen, welche die durch das Motormoment erzeugten treibenden Kräfte beeinflussen. Zu den Einflussfaktoren zählen unter anderem die verschiedenen Reibungsfaktoren und die Flächenträgheitsmomente. 
 
 Da eine Bestimmung der einzelnen Faktoren sehr aufwändig ist und die Varianzen der Fehleranteile  bei der Multiplikation zu $K_i$ ebenfalls multipliziert werden müssen, ist eine direkte Bestimmung von $K_i$ zu empfehlen.
-Die Bestimmung von $K_i$ muss zudem speziell für den Untergrund, auf dem der Roboter fahren soll, erfolgen. Der Einfluss weiterer Einflussfaktoren (Feuchtigkeit, Staub, Unebenheiten, etc.) sollte durch definierte Randbedingungen möglichst gering gehalten werden. 
+Die Bestimmung von $K_i$ muss zudem speziell für den Untergrund, auf dem der Roboter fahren soll, erfolgen. Der Einfluss weiterer Einflussfaktoren (Feuchtigkeit, Staub, Unebenheiten, etc.) sollte durch definierte Randbedingungen je nach Möglichkeit gering gehalten werden. 
 % Da die Reibung auch von der Auflagefläche der Rollen abhängig ist und diese je nach Fahrtrichtung (siehe Abbilung \ref{fig:himmel}) variiert, wird ein zusätzlicher Einfluss der Fahrtrichtung auf  $K_i$ vermutet.  % Reibung ist nicht von der Fläche abhängig
 
 \begin{figure}[H]
@@ -96,7 +96,7 @@ Die Bestimmung von $K_i$ muss zudem speziell für den Untergrund, auf dem der Ro
     \label{fig:himmel}
   \end {figure}
 
-Unebenheiten, welche aufgrund der Funktionsweise der Mecanum-Räder ebenfalls einen großen Einfluss haben, können aus Praktikabilitätsgründen bei optionalen Versuchsreihen nicht berücksichtigt werden. 
+Obwohl der Einfluss auf die Funktionsweise der Mecanum-Räder durch Unebenheiten sehr groß ist, kann dieser bei optionalen Versuchsreihen nicht berücksichtigt werden, da er so nicht ohne Weiteres messbar ist.
 
 Aufgrund der vielen Variablen und des erhöhten Zeitaufwandes wird auf eine genaue Bestimmung des Faktors $K_i$ an dieser Stelle verzichtet. 
 
