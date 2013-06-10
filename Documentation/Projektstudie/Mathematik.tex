@@ -11,7 +11,7 @@
     \caption{Einführung der verwendeten Koordinatensysteme, der Position des Arms sowie der Radnummerierung.}
 \end{figure}
 Dieses Kapitel beschreibt die Mathematik hinter der Kinematik und Dynamik des Mecanum-Roboters.
-Jede Bewegung setzt sich aus einer translatorischen und einer rotatorischen Teilbewegung zusammen. Abbildung\ref{fig:Drehrichtung} zeigt die Raddrehrichtungen und die daraus resultierenden Roboterbewegungen.
+Jede Bewegung setzt sich aus einer translatorischen und einer rotatorischen Teilbewegung zusammen. Abbildung~\ref{fig:Drehrichtung} zeigt die Raddrehrichtungen und die daraus resultierenden Roboterbewegungen.
 
 \begin{figure}[H]
     \centering
@@ -32,7 +32,7 @@ Die folgenden Rechnungen behandeln die Ermittlung der einzelnen Soll-Radgeschwin
     \caption{Kräftegleichgewicht an einem Mecanum-Rad.}
 \end{figure}
 
-Die Leistung einer vektoriellen Kraft berechnet sich nach : 
+Die Leistung einer vektoriellen Kraft berechnet sich nach: 
 $$ P_F = F_T \cdot v_F $$
 
 Wirken Kraft und Geschwindigkeit entlang einer Koordinatenachse, haben beide Vektoren die gleiche Komponente ungleich null und ihr Skalarprodukt kann vereinfacht als Produkt der skalaren Größen betrachtet werden.
@@ -41,18 +41,16 @@ Die Kraftvektor in $x$- und $y$-Richtung setzt sich zusammen als die Summe der e
 \begin{align*}
     \sum_{i=1}^4 F_{ix} &= \sum_{i=1}^4 F_i \cos \alpha \\
     &= \sum_{i=1}^4 (-1)^i SIG \cdot K_i F_{Ti} \sin \alpha \cos \alpha \\
-    &= \sum_{i=1}^4 (-1)^i SIG \cdot \frac{1}{2} K_i F_{Ti}
-\end{align*}
-\begin{align*}
+    &= \sum_{i=1}^4 (-1)^i SIG \cdot \frac{1}{2} K_i F_{Ti} \\
     \sum_{i=1}^4 F_{iy} &= \sum_{i=1}^4 F_i \sin \alpha \\
     &= \sum_{i=1}^4 SIG \cdot K_i F_{Ti} \sin^2 \alpha \\
     &= \sum_{i=1}^4 SIG \cdot \frac{1}{2} K_i F_{Ti}
 \end{align*}
 
-SIG sei die Vorzeichenkonventionen für die Drehrichtung der Räder.
+$SIG$ sei die Vorzeichenkonventionen für die Drehrichtung der Räder.
 Diese wird in der Steuerung direkt implementiert und wird daher bei den folgenden Rechnungen nicht weiter betrachtet.
 
-Der Winkel $ \alpha $ beschreibt den Winkel, in dem die Rollen auf dem Mecanum-Rad angebracht sind.
+Der Winkel $\alpha$ beschreibt den Winkel, in dem die Rollen auf dem Mecanum-Rad angebracht sind.
 In den meisten Fällen gilt $\alpha = 45^\circ$.
 
 Für eine translatorische Bewegung müssen die Radpaare mit gleicher Geschwindigkeit drehen.
@@ -87,8 +85,9 @@ Für eine Drehung im Uhrzeigersinn drehen beispielsweise Rad 1 und 2 rückwärts
 
 Der Faktor $K_i$ hat einen großen Einfluss auf die Bewegung des Mecanum-Roboters. Er setzt sich aus unterschiedlichen Einzelfaktoren zusammen, welche die durch das Motormoment erzeugten treibenden Kräfte beeinflussen. Zu den Einflussfaktoren zählen unter anderem die verschiedenen Reibungsfaktoren und die Flächenträgheitsmomente. 
 
-Da eine Bestimmung der einzelnen Faktoren sehr aufwendig ist und die Varianzen der Fehleranteile  bei der Multiplikation zu $K_i$ ebenfalls multipliziert werden müssen, ist eine direkte Bestimmung von $K_i$ zu empfehlen. Die Bestimmung von  $K_i$ muss zudem explizit für den Untergrund auf dem der Roboter fahren soll erfolgen. Der Einfluss weiterer Einflussfaktoren (Feuchtigkeit, Staub, Unebenheiten, etc.) sollte durch definierte Randbedingungen möglichst gering gehalten werden. 
-Da die Reibung auch von der Auflagefläche der Rollen abhängig ist und diese je nach Fahrtrichtung (siehe Abbilung \ref{fig:himmel}) variiert, wird ein zusätzlicher Einfluss der Fahrtrichtung auf  $K_i$ vermutet. 
+Da eine Bestimmung der einzelnen Faktoren sehr aufwändig ist und die Varianzen der Fehleranteile  bei der Multiplikation zu $K_i$ ebenfalls multipliziert werden müssen, ist eine direkte Bestimmung von $K_i$ zu empfehlen.
+Die Bestimmung von $K_i$ muss zudem speziell für den Untergrund, auf dem der Roboter fahren soll, erfolgen. Der Einfluss weiterer Einflussfaktoren (Feuchtigkeit, Staub, Unebenheiten, etc.) sollte durch definierte Randbedingungen möglichst gering gehalten werden. 
+% Da die Reibung auch von der Auflagefläche der Rollen abhängig ist und diese je nach Fahrtrichtung (siehe Abbilung \ref{fig:himmel}) variiert, wird ein zusätzlicher Einfluss der Fahrtrichtung auf  $K_i$ vermutet.  % Reibung ist nicht von der Fläche abhängig
 
 \begin{figure}[H]
     \centering
