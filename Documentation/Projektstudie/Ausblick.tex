@@ -63,7 +63,20 @@ sind die Abmessungen der Bauteile  in Grau, Lötpads in Grün, die Top Kupferfl�
 
 \subsection{Drahtlose Navigation auf dem Betriebsgelände}
 \label{sec:Navigation}
-Dijkstra
-% - Steuerung übers Netzwerk / W-Lan: Python Flask Server + Raspberry
-% - Deckenkamera
-% - Hindernissen ausweichen (Dijkstra?)
+\begin{figure}
+\centering
+    \includegraphics[width=.8\textwidth]{Abbildungen/Dijkstra}
+    \caption[Dijkstra]{Pathfinding-Algorithmus nach Dijkstra}
+    \label{fig:Dijkstra}
+\end{figure}
+Um die Navigation auf dem Betriebsgelände zu ermöglichen, muss der Roboter stets seine Position und Ausrichtung im Raum kennen. Dazu kann eine Deckenkamera und eine entsprechende Markierung auf dem Roboter eingesetzt werden.
+
+In Abbildung~\ref{fig:Dijkstra} ist ein Ergebnis des Dijkstra Pathfinding Algorithmus\footnote{http://www.smellycatcards.com/index.php/welcome/pathfinding} dargestellt.
+Das Betriebsgelände wird hier in befahrbare (schwarz) und nicht befahrbare Bereiche (blau) eingeteilt. Die resultierende Fahrtvorgabe (weiße Linie) ist die kürzeste Verbindung zwischen Start- und Zielpunkt in der Halle (Ob nur senkrechte oder auch diagonale Fahrten zugelassen werden, kann in der der Implementierung des Algorithmus angepasst werden).
+
+Die nicht befahrbaren Bereiche können auf diese Weise dynamisch angepasst werden. So können auch die Deckenkamera und die auf dem Roboter integrierten Sensoren zur Hindernisserkennung hinzugezogen werden.
+
+Der Roboter soll sich im Akkubetrieb kabellos bewegen können. Für die Kommunikation ist daher die Einrichtung eines Funknetzwerks nötig. Dies kann durch ein auf den Arduino aufgestecktes Ethernet-Shield realisiert werden, wegen der begrenzten Rechenleistung und Speicherkapazität des Arduinos wird diese Möglichkeit aber unnötig kompliziert.
+Einfacher wäre die Integration eines Kleinrechners auf Basis von Embedded Linux\footnote{Beispielsweise dem Raspberry Pi: http://www.raspberrypi.org}. Die Server-Framework \emph{Flask\footnote{http://flask.pocoo.org}} auf Basis der Programmiersprache \emph{Python\footnote{http://www.python.org}} stellt eine einfache Möglichkeit dar, den Roboter über ein Webinterface zugänglich zu machen. Über die Library \emph{PySerial\footnote{http://pyserial.sourceforge.net}} kann die in Kapitel~\ref{sec:API} erläuterte API genutzt werden, am Arduino und dem CAN-Bus Shield wären somit keine Änderung notwendig.
+
+
