@@ -51,7 +51,7 @@ $SIG$ sei die Vorzeichenkonventionen für die Drehrichtung der Räder.
 Diese wird in der Steuerung direkt implementiert und wird daher bei den folgenden Rechnungen nicht weiter betrachtet.
 
 Der Winkel $\alpha$ beschreibt den Winkel, in dem die Rollen auf dem Mecanum-Rad angebracht sind.
-In den meisten Fällen gilt $\alpha = 45^\circ$.
+In dem betrachteten Fall gilt $\alpha = 45^\circ$.
 
 Für eine translatorische Bewegung müssen die Radpaare mit gleicher Geschwindigkeit drehen.
 Entsprechend müssen ihre Kraftvektoren $F_{T1, 3} / F_{T2, 4}$ gleich groß sein.
@@ -61,13 +61,13 @@ Durch Auflösen der Summenzeichen erhält man ein Gleichungssystem:
     F_y &= K_i F_{T1, 3}   + K_i F_{T2, 4}
 \end{align*}
 
-Nach dem Umstellen erhält man $F_{T1, 3}$ und $F_{T2, 4}$ und kann somit auch direkt die Geschwindigkeiten berechnen:
+Durch Umstellen erhält man $F_{T1, 3}$ und $F_{T2, 4}$ und kann somit auch direkt die Geschwindigkeiten berechnen:
 \begin{align*}
     F_{T1, 3} &= \frac{F_y + F_x}{K_i} &\Rightarrow v_{T1, 3} &= \frac{v_y + v_x}{K_i} \\
     F_{T2, 4} &= \frac{F_y - F_x}{K_i} &\Rightarrow v_{T2, 4} &= \frac{v_y - v_x}{K_i} \\
 \end{align*}
 
-Der Faktor $K_i$ setzt sich aus unterschiedlichen Einzelfaktoren zusammen, welche die durch das Motormoment erzeugten treibenden Kräfte beeinflussen. $K_i$ wird für den Boden der Werkstatt empirisch ermittelt.
+Der Faktor $K_i$ wird im Kapitel \ref{sec:k-faktor} detailliert betrachtet.
 
 
 \subsection{Rotation}
