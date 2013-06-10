@@ -11,9 +11,10 @@ Beispiel:
 Ein Motor mit der Node-ID 3 wird über die COB-ID 0x603 angesteuert.
 
 
-\subsection{Initialisierung}
+\subsection{Befehlsaufrufe}
 
-Vor dem Start der Motoren muss das Leistungsteil eingeschaltet und der richtige Operationsmodus gewählt werden. 
+Vor dem Start der Motoren muss das Leistungsteil eingeschaltet und der richtige Operationsmodus gewählt werden. Anschließend werden die Einstellungen im Velocity Mode vorgenommen. 
+
 \begin{table}[H]
     \begin{tabularx}{\textwidth}{@{}Xl@{}} \toprule
     
@@ -55,17 +56,17 @@ Vor dem Start der Motoren muss das Leistungsteil eingeschaltet und der richtige 
 \end{table}
 
 
-\begin{table}[h]
+\begin{table}[H]
     \begin{tabularx}{\textwidth}{@{}Xl@{}} \toprule
     
     Befehl & Code und Beispiel \\
     \midrule
     
     Minimale Geschwindigkeit einstellen &  \ttfamily{0x23 0x46 0x60 0x01 \textcolor{blue}{0x00 0x00} 0x00 0x00} \\
-    & Hier: \ttfamily{0x0000} = 0 Schritte/s \\
+    & Hier: \ttfamily{\textcolor{blue}{0x0000}} = 0 Schritte/s \\
     
     Maximale Geschwindigkeit einstellen &  \ttfamily{0x23 0x46 0x60 0x02 \textcolor{blue}{0xA8 0x61} 0x00 0x00} \\
-    & Hier: \ttfamily{0x61A8} = 25000 Schritte/s \\
+    & Hier: \ttfamily{\textcolor{blue}{0x61A8}} = 25000 Schritte/s \\
     
     \textbf{Beschleunigungsrampe\footnotemark\addtocounter{footnote}{-1}:} \\
     
@@ -89,7 +90,7 @@ Vor dem Start der Motoren muss das Leistungsteil eingeschaltet und der richtige 
     (Für Quick-Stop) \\
     
      Geschwindigkeitsänderung eintellen &  \ttfamily{0x23 0x4A 0x60 0x01 \textcolor{blue}{0xA0 0x86} 0x00 0x00} \\
-    & Hier: \ttfamily{0xA086} = 34464 Schritte/s \\
+    & Hier: \ttfamily{0x86A0} = 34464 Schritte/s \\
     
     Zeitänderung einstellen  &  \ttfamily{0x2B 0x4A 0x60 0x02 \textcolor{blue}{0x01 0x00} 0x00 0x00} \\
     & Hier: \ttfamily{0x0001} = 1 s \\
@@ -100,19 +101,21 @@ Vor dem Start der Motoren muss das Leistungsteil eingeschaltet und der richtige 
 \end{table}
 \footnotetext{angegeben in Geschwindigkeitsänderung pro Zeitänderung }
 
+Ist die Initialisierung abgeschlossen, kann mit folgendem Befehl die Geschwindigkeit des Schrittmotors in Schritte pro Sekunde eingestellt werden.
 
-\begin{table}[h]
+\begin{table}[H]
     \begin{tabularx}{\textwidth}{@{}Xl@{}} \toprule
-    
- 
+     
     Befehl & Code und Beispiel \\
     \midrule
     
-    Geschwindigkeit auswählen &  \ttfamily{0x2B 0x42 0x60 0x00 \textcolor{blue}{0x10 0x27} 0x00 0x00} \\
+    Geschwindigkeit einstellen &  \ttfamily{0x2B 0x42 0x60 0x00 \textcolor{blue}{0x10 0x27} 0x00 0x00} \\
     & Hier: \ttfamily{0x2710} = 10000 Schritte/s \\
 
     \bottomrule
     \end{tabularx}
-    \caption{Geschwindigkeit auswählen}
+    \caption{Geschwindigkeit einstellen}
 \end{table}
+
+
 

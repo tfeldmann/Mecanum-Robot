@@ -4,6 +4,7 @@
 
 \section{Mathematische Modellierung}
 \label{sec:Mathematische Modellierung}
+%\Delta
 \begin{figure}
     \centering
     \includegraphics[width=.8\textwidth]{Abbildungen/Koordinaten}
@@ -74,38 +75,26 @@ Für eine Drehung im Uhrzeigersinn drehen beispielsweise Rad 1 und 2 rückwärts
     v_2 = v_3 &= + v_{ref}
 \end{align*}
 
-\subsection{Versuchsreihe: Bestimmung $K_i$}
-\label{sec:versuche-k-faktor}
+\subsection{Betrachtung $K_i$}
+\label{sec:k-faktor}
 
-Der Faktor $K_i$ hat einen großen Einfluss auf die Bewegung des Mecanum-Roboters. Er setzt sich aus unterschiedlichen Einzelfaktoren zusammen, welche die durch das Motormoment erzeugten treibenden Kräfte beeinflussen. Zu den Einflussfaktoren zählen unter anderem die verschiedenen Reibungsfaktoren und die Flächenträgheitsmomente. Da eine Bestimmung der einzelnen Faktoren sehr aufwendig wäre und die Varianzen der Fehleranteile  bei der Multiplikation zu $K_i$ ebenfalls multipliziert werden müssen, wird $K_i$ direkt ermittelt. 
+Der Faktor $K_i$ hat einen großen Einfluss auf die Bewegung des Mecanum-Roboters. Er setzt sich aus unterschiedlichen Einzelfaktoren zusammen, welche die durch das Motormoment erzeugten treibenden Kräfte beeinflussen. Zu den Einflussfaktoren zählen unter anderem die verschiedenen Reibungsfaktoren und die Flächenträgheitsmomente. 
 
-Bei diversen Probefahrten wird ein sehr großer Einfluss des Untergrunds festgestellt. Die Bestimmung für  $K_i$  erfolgt daher explizit für den Boden in der Werkstatt. Um den Einfluss von Staub und anderen äußeren Faktoren gering zu halten, wird die Versuchsreihe unter folgenden definierten Bedingungen durchgeführt:
-
-\begin{itemize}
-\item gefegt
-\item trocken 
-\item ölfrei
-\end {itemize}
-
-Unebenheiten, welche aufgrund der Funktionsweise der Mecanum-Räder einen ebenfalls einen großen Einfluss haben, können aus Praktikabilitätsgründen nicht berücksichtigt werden.Zudem wird eine Richtungsabhängigkeit des Faktors vermutet. Dieser wird an dieser Stelle aber nicht weiter untersucht. Abbildung \ref{fig:himmel} zeigt die Ortierung des Roboters. Für die Richtungen N und S wird $K_i$ im Folgenden bestimmt. 
+Da eine Bestimmung der einzelnen Faktoren sehr aufwendig ist und die Varianzen der Fehleranteile  bei der Multiplikation zu $K_i$ ebenfalls multipliziert werden müssen, ist eine direkte Bestimmung von $K_i$ zu empfehlen. Die Bestimmung von  $K_i$ muss zudem explizit für den Untergrund auf dem der Roboter fahren soll erfolgen. Der Einfluss weiterer Einflussfaktoren (Feuchtigkeit, Staub, etc.) sollte durch definierte Randbedingungen möglichst gering gehalten werden. 
+Da die Reibung auch von der Auflagefläche der Rollen abhängig ist und diese je nach Fahrtrichtung (siehe Abbilung \ref{fig:himmel}) variiert, wird ein zusätzlicher Einfluss der Fahrtrichtung auf  $K_i$ vermutet. 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\textwidth]{Abbildungen/Himmelsrichtungen}
     \caption{Orientierung des Roboters}
     \label{fig:himmel}
-\end{figure}
+  \end {figure}
 
-Für die Versuchsreihe wird eine möglichst ebene Versuchsstrecke ausgewählt. Je länger die Strecke ist, desto größer ist die Gefahr von Unebenheiten. Bei einer sehr kurzen Strecke und entsprechend kurzen Messzeiten ist die Reproduzierbarkeit nicht gewährleistet. Es ist ein geeigneter Kompromiss zu wählen. 
-Im Programm besteht die Möglichkeit den Motoren eine Anzahl von Schritten und damit eine Laufzeit vorzugeben. Das Messen der Zeit, welches aufgrund der Reaktionszeit beim Stoppen der Zeit als Fehlerquelle identifiziert wird, entfällt somit ebenfalls. 
+Unebenheiten, welche aufgrund der Funktionsweise der Mecanum-Räder ebenfalls einen großen Einfluss haben, können aus Praktikabilitätsgründen bei optionalen Versuchsreihen nicht berücksichtigt werden. 
 
-Für die Bestimmung des Faktors $K_i$ wird eine Laufzeit von 10~s und 10000~Schritten~pro~s vorgegeben. Um Wiederholbarkeit und Reproduzierbarkeit des Messsystems zu gewährleisten, wird  die zurückgelegte Strecke in drei Durchläufen von zwei Personen unanhängig voneinader gemessen. Aus der Untersetzung des Motors und dem Umfang der Räder wird die Sollstrecke bzw. Sollgeschwindigkeit berechnet. Um $K_i$ zu bestimmen wird diese im Verhältnis zur gefahrenen Strecke betrachtet.
-
+Aufgrund der vielen Variablen und des erhöhten Zeitaufwandes wird auf eine genaue Bestimmung des Faktors $K_i$ an dieser Stelle verzichtet. 
 
 
-
-
-% Versuchsreihe_01 --> Excel
 
 
 

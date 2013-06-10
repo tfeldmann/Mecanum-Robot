@@ -18,7 +18,12 @@ Die Motoren werden durch das Drücken des Start/Stopp-Tasters mit dem Zeigefinge
 Zur Feinjustierung der Maximalgeschwindigkeit wird der in Abbildung~\ref{fig:Joystick} gezeigte Schubregler genutzt. Die aus der Rotations- und Translationsvorgabe resultierenden Radgeschwindigkeiten haben einen Wert $0 < v_i < 1$ und werden anschließend mit dem Wert des Schubreglers multipliziert, so dass maximal Geschwindigkeiten von 25000 Schritten pro Sekunde möglich sind.
 
 \subsection{Visualisierung}
-% Todo: Bild des Programms
+\begin{figure}
+\centering
+    \includegraphics[width=.6\textwidth]{Abbildungen/Visualisierung}
+    \caption[Visualisierung]{Screenshot des Steuerungsprogramms}
+    \label{fig:Visualisierung}
+\end{figure}
 Vor der Programmierung des Roboters wird die Joystick-Eingabe und das mathematische Modell zunächst mit Hilfe einer Visualisierung validiert.
 Die Visualisierung ist in der Programmiersprache Java\footnote{http://www.java.com} verfasst und ist damit plattformunabhängig.
 Zur Vereinfachung der graphischen Ausgabe wird die \emph{Processing}\footnote{http://www.processing.org}-Library verwendet.
