@@ -29,16 +29,16 @@ class MecanumVehicle
         // draw wheels
         strokeWeight(2);
         stroke(0, 100, 0);
-        line(w, 0, w - wheel[0], - wheel[0]);
-        line(0, 0, wheel[1], - wheel[1]);
-        line(0, h, - wheel[2], h - wheel[2]);
-        line(w, h, w + wheel[3], h - wheel[3]);
+        line(w, 0, w - 50*wheel[0], 50*- wheel[0]);
+        line(0, 0, 50*wheel[1], - wheel[1]*50);
+        line(0, h, - 50*wheel[2], h - 50*wheel[2]);
+        line(w, h, w + 50*wheel[3], h - 50*wheel[3]);
 
         // draw resulting forces
         strokeWeight(3);
         stroke(0, 200, 0);
-        float fx = 0.7 * (-wheel[0] + wheel[1] - wheel[2] + wheel[3]);
-        float fy = 0.7 * (wheel[0] + wheel[1] + wheel[2] + wheel[3]);
+        float fx = 20 * (-wheel[0] + wheel[1] - wheel[2] + wheel[3]);
+        float fy = 20 * (wheel[0] + wheel[1] + wheel[2] + wheel[3]);
         line(w / 2, h / 2, w / 2 + round(fx), h / 2 - round(fy));
 
         // text forces

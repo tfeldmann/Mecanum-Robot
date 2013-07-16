@@ -1,0 +1,83 @@
+% !TEX root = Projektstudie.tex
+% API
+
+\section{API}
+\label{sec:API}
+\subsection{Befehle}
+Die Kommunikation mit dem Roboter findet über serielle Schnittstelle bei 115200 baud statt.
+Auf dem Arduino wird die Library \emph{SerialCommand}\footnote{https://github.com/kroimon/Arduino-SerialCommand} für die Interpretation der Ergebnisse genutzt.
+
+Folgende Befehle sind über die serielle Schnittstelle verfügbar:
+\begin{description}
+\item \lstinline{@start} \\
+Initialisiert und startet die Schrittmotor-Treiberkarten gemäß Kapitel~\ref{sec:Treiber}.
+Der Roboter ist daraufhin fahrbereit.
+
+\item \lstinline{@stop} \\
+Führt einen Not-Stopp durch. Dabei wird der in Kapitel~\ref{sec:Treiber} beschriebene Quickstop ausgeführt.
+Anschließend befinden sich die Schrittmotor-Treiberkarten im Ruhezustand und müssen erst wieder mit dem Befehl \lstinline{@start} gestartet werden.
+
+\item \lstinline{@v v1 v2 v3 v4}\\
+Über diesen Befehl werden die Soll-Radgeschwindigkeiten vorgegeben.
+
+Für \lstinline{v1}, \lstinline{v2}, \lstinline{v3} und \lstinline{v4} sind durch Leerzeichen getrennte, ASCII-codierte Integer im Bereich von $-25000$ bis $25000$ (Schritte pro Sekunde) anzugeben.
+
+\item Demoprogramme\\
+    \lstinline{@demo_translation}\\
+    \lstinline{@demo_forward}\\
+    \lstinline{@demo_sideways}\\
+    \lstinline{@demo_stopWithDelay}\\
+Diese Beispielprogramme für Demonstrationszwecke lassen den Roboter Viertelkreise auf verschiedene Arten (translatorisch, vorwärts, seitwärts) ausführen.\\
+\lstinline{@demo_stopWithDelay} lässt den Roboter exakt 10 Sekunden mit definierter Geschwindigkeit geradeaus fahren und wird für die Ermittlung des Faktors $K$ genutzt.
+
+\item \lstinline{@about} \\
+Zeigt Informationen über die Version und Kompilierungszeitpunkt der Firmware.
+\end{description}
+
+
+\subsection{Fehlercodes}
+Tritt bei der Kommunikation mit der API ein Fehler auf, führt der Roboter sofort einen Not-Stopp aus und antwortet mit einem Fehlercode sowie einer Fehlerbeschreibung.
+Damit ist auch bei einer Störung der Kommunikation gewährleistet, dass der Roboter nicht außer Kontrolle gerät.
+Mögliche Fehlercodes sind beispielsweise:
+
+\lstinline{!E01: Not enough arguments supplied.}\\
+\lstinline{!E02: Unknown command: [command]}\\
+
+
+\subsection{Ereignisse}
+Um externer Software Rückschlüsse auf den Zustand des Roboters zu ermöglichen, sendet dieser bei erfolgreichen Initialisierungen oder Befehlen Ereignisprotokolle.
+
+Fest definierte, für die steuernde Software relevante Aktivitäten werden mit vorangestelltem Index gesendet:\\
+\lstinline{@A01: All motors are ready.}\\
+\lstinline{@A02: New motor speed set.}\\
+\lstinline{@A03: QuickStop successful.}
+
+Sonstige Logging-Nachrichten werden mit einer Raute versehen.
+Dazu zählen aktuelle Soll-/Ist-Werte und Informationen über die Firmware, wie beispielsweise\\
+\lstinline{# Debug mode activated}\\
+\lstinline{# Firmware Version 1.0, compiled on Tue Jun 4 18:15:59 2013}
+
+
+\subsection{C-API}
+Für die Steuerung des Roboters aus der Firmware heraus werden verschiedene C-Funktionen bereitgestellt. Relevant für den Programmierer sind dabei:
+
+\begin{description}
+\item \lstinline{void robot_begin()} \\
+Initialisiert die Kommunikation mit dem Roboter. Der CAN-BUS Übertragungsrate wird auf 1Mbaud festgelegt. Diese Funktion wird üblicherweise einmal in der \lstinline{setup()}-Routine des Arduinos ausgeführt.
+
+\item \lstinline{void robot_startMotors()} \\
+Startet alle vier Motoren des Roboters.
+Die Schrittmotor-Treiberkarten werden dabei wie in Kapitel~\ref{sec:Treiber} beschrieben auf die richtigen Beschleunigungswerte und den \emph{Velocity-Mode} eingestellt.
+Durch die vollständige Initialisierung der Treiberkarten in diesem Schritt ist gewährleistet, dass nach einem Austausch einer Treiberkarte keine manuellen Einstellungen vorgenommen werden müssen.
+Nach dem Ausführen dieser Funktion ist der Roboter fahrbereit.
+
+\item \lstinline{void robot_setMotorSpeed(int16_t speed[4])} \\
+Dieser Befehl dient zum Setzen der Geschwindigkeiten aller vier Motoren.
+Die Geschwindigkeiten werden als \lstinline{array} von Integern übergeben.
+Die maximale Geschwindigkeit eines Motors ist auf 25000 Schritte pro Sekunde festgelegt, dementsprechend müssen Werte zwischen -25000 und 25000 angegeben werden.
+Da die Motoren auf den gegenüberliegenden Seiten des Roboters gegensinnig angebracht sind, findet in der Software noch eine Umrechnung statt, so dass der Roboter vorwärts fährt, wenn alle Geschwindigkeiten positiv angegeben werden.
+
+\item \lstinline{void robot_quickStop()} \\
+Führt einen Not-Stopp durch. Dabei wird der in Kapitel~\ref{sec:Treiber} beschriebene Quickstop ausgeführt.
+Anschließend befinden sich die Schrittmotor-Treiberkarten im Ruhezustand und müssen erst wieder mit dem Befehl \lstinline{robot_startMotors()} gestartet werden.
+\end{description}

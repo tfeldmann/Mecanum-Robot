@@ -19,7 +19,7 @@ Serial serial;
 
 void setup()
 {
-    size(500, 500);
+    size(300, 300);
     smooth();
     frameRate(20);
 

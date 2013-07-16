@@ -1,0 +1,32 @@
+% !TEX root = Kreisfahrt.tex
+\section{Programmierung}
+Der Roboter wird von einem Arduino Uno gesteuert, daher erfolgt die Programmierung in $C$. Das CAN-BUS Shield der Firma SparkFun wird auf den Arduino aufgesteckt und ermöglicht die Kommunikation mit den Schrittmotortreibern STMCI47 der Firma Nanotec.
+Für die Umsetzung einer Kreisfahrt gibt es zwei Möglichkeiten:
+
+\begin{description}
+\item[Explizit, iterativ:]~\\
+Dem Roboter wird in einem festgelegten Takt mit den neuen Sollgeschwindigkeiten für die Räder gespeist. Die Sollgeschwindigkeiten können zur Laufzeit berechnet werden oder aus einer Lookup-Tabelle stammen.
+
+Ein zu langsam eingestellter Takt führt zu polygonalen Fahrverläufen, die den Sollkreis lediglich annähern. Dementsprechend ist diese Methode auch gegenüber Taktänderungen sehr anfällig, welche beispielsweise auftreten, wenn andere Prozesse im Mikrocontroller zu viel Rechenzeit benötigen.
+
+\item[Implizit, funktionell:]~\\
+Die Soll-Radgeschwindigkeiten werden als Funktion abhängig von der Zeit seit Beginn der Kreisfahrt definiert. Sie können zu jedem beliebigen Zeitpunkt abgefragt werden. Das erlaubt dem Mikrocontroller seine Rechenzeit frei einzuteilen und resultiert in ruckfreien, flüssigen Bewegungsabläufen.
+\end{description}
+
+Wegen dieser Vorteile wird die implizite Definition der Fahrbewegung implementiert.
+Der dafür notwendige Faktor $K_i$ wurde für den Bodenbelag in der Werkstatt empirisch ermittelt.
+
+Alle Fahrten werden über zwei Bezugsgrößen definiert: Die Winkelgeschwindigkeit $\omega(t)$ für die rotatorische- und die Richtungvektor $\underline{v}(t)$ für die translatorische Komponente der Fahrt. Das Bezugssystem sei hierbei das robotereigene Koordinatensystem.
+
+In den Bewegungsabläufen \emph{Kreisfahrt vorwärts} (Abbildung~\ref{fig:kreis-vorwaerts}) und \emph{Kreisfahrt seitwärts} (Abbildung~\ref{fig:kreis-seitwaerts}) gilt $\omega = const$ und $\underline{v} = const$. $\omega$ und $\underline{v}$ müssen daher nur einmal berechnet und eingestellt werden.
+
+Anders gestaltet sich die translatorische Kreisfahrt (Abbildung~\ref{fig:kreis-translatorisch}). Diese ist wie folgt hinterlegt:
+\begin{align*}
+    \omega(t) &= 0 \\
+    \underline{v}(t) &= v_0
+        \begin{pmatrix}
+            \cos(t \cdot k_t) \\
+            \sin(t \cdot k_t)
+        \end{pmatrix}
+\end{align*}
+Der Roboter behält dabei seine Geschwindigkeit über die gesamte Kreisfahrt bei, da $\left|\underline{v}\right| = const$. Die Fahrt wird gestoppt, sobald $v_x < 0$ wird, also nach dem geforderten Viertelkreis.

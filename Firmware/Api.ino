@@ -15,6 +15,9 @@ void api_unknown(const char *command)
 {
     Serial.print("!E02: Unknown command: ");
     Serial.println(command);
+
+    // stop robot for safety
+    api_stop();
 }
 
 void api_begin()
@@ -22,6 +25,11 @@ void api_begin()
     serialCommand.addCommand("@start", api_start);
     serialCommand.addCommand("@stop", api_stop);
     serialCommand.addCommand("@v", api_v);
+    serialCommand.addCommand("@demo_translation", demo_translation);
+    serialCommand.addCommand("@demo_forward", demo_forward);
+    serialCommand.addCommand("@demo_sideways", demo_sideways);
+    serialCommand.addCommand("@demo_stopWithDelay", demo_stopWithDelay);
+    serialCommand.addCommand("@about", api_about);
     serialCommand.setDefaultHandler(api_unknown);
 }
 
@@ -31,28 +39,21 @@ void api_begin()
 
 /**
  * Start the engines
- *
  * Usage: "@start"
  */
 void api_start()
 {
-    for (int wheel = 0; wheel < 4; wheel++)
-    {
-        robot_startWheel(wheel);
-    }
+    robot_startMotors();
 }
 
 /**
  * Perform a quick stop
- *
  * Usage: "@stop"
  */
 void api_stop()
 {
-    for (int wheel = 0; wheel < 4; wheel++)
-    {
-        robot_quickStop(wheel);
-    }
+    demo_stop();
+    robot_quickStop();
 }
 
 /**
@@ -75,9 +76,13 @@ void api_v()
         }
         v[wheel] = atoi(value);
     }
+    robot_setMotorSpeed(v);
+}
 
-    for (int wheel = 0; wheel < 4; wheel++)
-    {
-        robot_setMotorSpeed(wheel, v[wheel]);
-    }
+void api_about()
+{
+    Serial.print("#Firmware Version: ");
+    Serial.println(VERSION);
+    Serial.print("#Compiled on: ");
+    Serial.println(__TIMESTAMP__);
 }
